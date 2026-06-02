@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tuknova | Powering Smart Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="family">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #05070f;
@@ -51,7 +51,6 @@
             gap: 15px;
         }
 
-        /* Temporary high-end placeholder if local logo file isn't found */
         .logo-placeholder {
             font-family: 'Orbitron', sans-serif;
             font-size: 24px;
@@ -85,23 +84,6 @@
             color: var(--primary-blue);
         }
 
-        .admin-toggle-btn {
-            background: transparent;
-            border: 1px solid var(--primary-blue);
-            color: var(--primary-blue);
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .admin-toggle-btn:hover {
-            background: var(--primary-blue);
-            color: var(--bg-color);
-            box-shadow: 0 0 15px var(--primary-blue);
-        }
-
         /* --- HERO SECTION --- */
         .hero {
             text-align: center;
@@ -123,61 +105,97 @@
         .hero p {
             color: var(--text-gray);
             font-size: 1.2rem;
-            max-width: 60px0px;
+            max-width: 600px;
             margin: 0 auto 30px auto;
         }
 
-        /* --- ADMIN PANEL (DYNAMIC UPLOADER) --- */
-        .admin-panel {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        /* --- ADMIN PORTAL CONTAINER --- */
+        .admin-view-wrapper {
+            display: none; /* Hidden strictly by default */
             max-width: 800px;
-            margin: 30px auto;
-            padding: 30px;
-            border-radius: 15px;
-            display: none; /* Toggled via JS */
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .admin-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 0 30px rgba(0,168,255,0.05);
         }
 
         .admin-panel h2 {
             font-family: 'Orbitron', sans-serif;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-logout-btn {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid #e74c3c;
+            color: #e74c3c;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-left: auto;
+            transition: 0.3s;
+        }
+
+        .admin-logout-btn:hover {
+            background: #e74c3c;
+            color: #fff;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-light);
         }
 
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 12px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.6);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             color: #fff;
+            transition: border-color 0.3s;
         }
 
-        .form-group input[type="file"] {
-            padding: 8px;
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
         }
 
         .submit-btn {
             background: linear-gradient(135deg, #00a8ff, #0056b3);
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 14px 25px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
             width: 100%;
             font-size: 16px;
+            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 168, 255, 0.5);
         }
 
         /* --- PRODUCTS CATALOGUE --- */
@@ -295,6 +313,35 @@
 
         .whatsapp-btn:hover {
             background: #128C7E;
+        }
+
+        /* --- FLOATING TRACKING WHATSAPP BUTTON --- */
+        .whatsapp-floating-tracker {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(37, 211, 102, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(37, 211, 102, 0.5);
+            color: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), 0 0 15px rgba(37, 211, 102, 0.2);
+            z-index: 9999;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .whatsapp-floating-tracker:hover {
+            transform: scale(1.1) rotate(15deg);
+            background: #25D366;
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
         }
 
         /* --- POPUP LIGHTBOX SLIDER --- */
@@ -438,44 +485,55 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#" class="active" onclick="filterCategory('all')">Home</a></li>
-                <li><button class="admin-toggle-btn" onclick="toggleAdminPanel()"><i class="fa-solid fa-lock"></i> Merchant Upload</button></li>
+                <li><a href="#" class="active" onclick="filterCategory('all')">Solutions Home</a></li>
             </ul>
         </nav>
     </header>
+
+    <a href="https://wa.me/2349064859498?text=Hello%20Tuknova%2C%20I%20am%20browsing%20your%20smart%20solutions%20catalogue%20and%20would%20like%20to%20make%20an%20inquiry%21" 
+       target="_blank" 
+       class="whatsapp-floating-tracker" 
+       title="Chat directly with an Engineer">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <section class="hero">
         <h1>TUK<span>NOVA</span></h1>
         <p>Powering Smart Solutions — High-Performance Inverters, Battery Banks, Solar Systems, & Advanced Smart CCTV Surveillance Ecosystems.</p>
     </section>
 
-    <section class="admin-panel" id="adminPanel">
-        <h2><i class="fa-solid fa-cloud-arrow-up"></i> Merchant Dashboard</h2>
-        <form id="productForm">
-            <div class="form-group">
-                <label for="prodCategory">Equipment Category</label>
-                <select id="prodCategory" required>
-                    <option value="inverter">Inverters</option>
-                    <option value="battery">Lithium & Gel Batteries</option>
-                    <option value="solar">Solar Panels</option>
-                    <option value="camera">Smart Security/CCTV Cameras</option>
-                </select>
+    <div class="admin-view-wrapper" id="adminWrapper">
+        <section class="admin-panel">
+            <div style="display:flex; align-items:center;">
+                <h2><i class="fa-solid fa-cloud-arrow-up"></i> Secure Merchant Upload</h2>
+                <button class="admin-logout-btn" onclick="exitAdminPortal()">Exit Dashboard</button>
             </div>
-            <div class="form-group">
-                <label for="prodTitle">Product Name / Model</label>
-                <input type="text" id="prodTitle" placeholder="e.g., Tuknova 5KVA Hybrid Smart Inverter" required>
-            </div>
-            <div class="form-group">
-                <label for="prodDesc">Specifications / Description</label>
-                <textarea id="prodDesc" rows="4" placeholder="Enter key technical features, efficiency runtime profiles, configurations..." required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="prodImages">Upload Images (Select multiple files at once)</label>
-                <input type="file" id="prodImages" accept="image/*" multiple required>
-            </div>
-            <button type="submit" class="submit-btn">Publish Product to Catalog</button>
-        </form>
-    </section>
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="prodCategory">Equipment Category</label>
+                    <select id="prodCategory" required>
+                        <option value="inverter">Inverters</option>
+                        <option value="battery">Lithium & Gel Batteries</option>
+                        <option value="solar">Solar Panels</option>
+                        <option value="camera">Smart Security/CCTV Cameras</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prodTitle">Product Name / Model</label>
+                    <input type="text" id="prodTitle" placeholder="e.g., Tuknova 5KVA Hybrid Smart Inverter" required>
+                </div>
+                <div class="form-group">
+                    <label for="prodDesc">Specifications / Description</label>
+                    <textarea id="prodDesc" rows="4" placeholder="Enter key technical features, efficiency runtime profiles, configurations..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prodImages">Upload Images (Select multiple files at once)</label>
+                    <input type="file" id="prodImages" accept="image/*" multiple required>
+                </div>
+                <button type="submit" class="submit-btn">Publish Product to Catalog</button>
+            </form>
+        </section>
+    </div>
 
     <main class="catalogue-container">
         <div class="tabs">
@@ -486,8 +544,7 @@
             <button class="tab-btn" onclick="filterCategory('camera', this)">CCTV & Cameras</button>
         </div>
 
-        <div class="grid" id="productGrid">
-            </div>
+        <div class="grid" id="productGrid"></div>
     </main>
 
     <div class="modal" id="sliderModal">
@@ -506,8 +563,7 @@
             <h2>Verified Client Experiences</h2>
             <p>Real feedback from premium installations across the country.</p>
         </div>
-        <div class="review-stream" id="reviewStream">
-            </div>
+        <div class="review-stream" id="reviewStream"></div>
     </section>
 
     <footer>
@@ -517,8 +573,11 @@
 
     <script>
         const WHATSAPP_NUMBER = "2349064859498";
+        
+        // --- ADMIN LOGIN CREDENTIAL CONFIGURATION CONFIG ---
+        const AUTH_USER = "admin";
+        const AUTH_PASS = "Tuknova2026!";
 
-        // Structured Preloaded National Customer Reviews Base
         const defaultReviews = [
             { text: "The Tuknova 5KVA system installed at my residence in Lekki phase 1 has been running completely uninterrupted. Zero complaints. Pure professional execution.", user: "Alhaji Kunle B.", location: "Lagos State", rating: 5 },
             { text: "Excellent customer relations! Their team handled our remote farm grid deployment down here in Ibadan flawlessly. Smart components working fine.", user: "Dr. Jude O.", location: "Oyo State", rating: 5 },
@@ -529,6 +588,31 @@
         let targetProducts = JSON.parse(localStorage.getItem('tuknova_products')) || [];
         let currentActiveSlideDeck = [];
         let currentSlideIdx = 0;
+
+        // Secure Login Routing Initialization Lifecycle
+        function handleSecureAdminCheck() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            if (urlParams.get('admin') === 'true') {
+                // Trigger Authentication prompt
+                const usernameInput = prompt("Enter Authorized Merchant Username:");
+                const passwordInput = prompt("Enter Secure Access Password:");
+
+                if (usernameInput === AUTH_USER && passwordInput === AUTH_PASS) {
+                    alert("Access Granted. Welcome back to the Tuknova Dashboard.");
+                    document.getElementById('adminWrapper').style.display = 'block';
+                    // Scroll down to the uploader cleanly
+                    document.getElementById('adminWrapper').scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    alert("Invalid System Credentials. Redirecting to Customer Portal...");
+                    window.location.href = window.location.pathname; // Strips out the URL queries
+                }
+            }
+        }
+
+        function exitAdminPortal() {
+            window.location.href = window.location.pathname;
+        }
 
         // Form Submission Management Lifecycle
         document.getElementById('productForm').addEventListener('submit', function(e) {
@@ -577,7 +661,7 @@
             const filtered = filter === 'all' ? targetProducts : targetProducts.filter(p => p.category === filter);
 
             if(filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:40px; color:var(--text-gray);">No systems listed in this scope. Click 'Merchant Upload' above to populate equipment configurations.</div>`;
+                grid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:40px; color:var(--text-gray);">No systems listed in this scope yet. Keep an eye out for our verified equipment updates!</div>`;
                 return;
             }
 
@@ -596,7 +680,7 @@
                         <h3 class="product-title">${p.title}</h3>
                         <p class="product-desc">${p.desc}</p>
                         <a href="${waLink}" target="_blank" class="whatsapp-btn">
-                            <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
+                            <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
                         </a>
                     </div>
                 `;
@@ -604,7 +688,6 @@
             });
         }
 
-        // Segment Categorization Actions
         function filterCategory(cat, element) {
             if(element) {
                 document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -613,13 +696,6 @@
             renderProducts(cat);
         }
 
-        // Functional Toggle Control Framework
-        function toggleAdminPanel() {
-            const panel = document.getElementById('adminPanel');
-            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
-        }
-
-        // Image Viewer Slider Implementation Logic
         function openSlider(imagesArray) {
             currentActiveSlideDeck = imagesArray;
             currentSlideIdx = 0;
@@ -634,11 +710,14 @@
             document.getElementById('modalImg').src = currentActiveSlideDeck[currentSlideIdx];
         }
 
+        document.getElementById('sliderModal').addEventListener('click', function(e) {
+            if(e.target === this) closeModal();
+        });
+
         function closeModal() {
             document.getElementById('sliderModal').style.display = 'none';
         }
 
-        // Dynamic Interactive Review Injection System Layer
         function generateReviews() {
             const reviewContainer = document.getElementById('reviewStream');
             reviewContainer.innerHTML = '';
@@ -662,8 +741,8 @@
             });
         }
 
-        // Self-Starting System Core Trigger Initialization
         window.onload = function() {
+            handleSecureAdminCheck();
             renderProducts();
             generateReviews();
         };
