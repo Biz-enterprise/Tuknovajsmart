@@ -1,46 +1,223 @@
-/* shared.css - The Master Stylesheet */
-:root {
-  --solar: #f5a623; --solar-hot: #ff7c1a; --arc: #00d4ff; --green: #00c97a;
-  --void: #050505; --deep: #0a0a0a; --panel: #111111; --border: rgba(255,255,255,0.1);
-  --white: #ffffff; --muted: #a0a0a0; --font-display: 'Syne', sans-serif; --font-body: 'Inter', sans-serif;
+/* ============================================================
+   TUKNOVA ENTERPRISE — SHARED DESIGN SYSTEM
+   Loaded by every page. Page-specific styles live in <style> blocks
+   inside each HTML file and should only ADD to this, never fight it.
+   ============================================================ */
+
+:root{
+  --void:#0a0908;
+  --deep:#100d0a;
+  --panel:#171310;
+  --border:#2a241d;
+  --white:#f7f3ec;
+  --muted:#a39a8c;
+
+  --solar:#f5a623;
+  --solar-hot:#ff7c1a;
+  --arc:#00d4ff;
+  --green:#00c97a;
+
+  --font-display:'Syne',sans-serif;
+  --font-body:'Inter',sans-serif;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; outline:none; }
-body { background: var(--void); color: var(--white); font-family: var(--font-body); overflow-x: hidden; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
 
-/* REUSABLE NAV & FOOTER STYLES (Paste your existing Nav/Footer CSS here) */
-
-/* THE ELECTRIC SKELETON */
-#skeleton-container {
-  position: fixed; bottom: 20px; left: 20px; width: 60px; height: 100px;
-  z-index: 9999; pointer-events: none; transition: transform 0.2s linear; opacity: 0.6;
+body{
+  background:var(--void);
+  color:var(--white);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-.bolt { position: absolute; background: #fff; width: 2px; opacity: 0; pointer-events: none; }
 
-/* THE WHATSAPP SMILE BUTTON */
-#wa-float {
-  position: fixed; bottom: 30px; right: 30px; z-index: 10000;
-  background: #25D366; width: 60px; height: 60px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); text-decoration: none;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:1rem}
+
+::selection{background:var(--solar);color:var(--void)}
+
+:focus-visible{outline:2px solid var(--solar);outline-offset:3px;border-radius:4px}
+
+/* ---------- SECTION SCAFFOLDING ---------- */
+section{padding:90px 5%;position:relative}
+.section-eye{font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--solar);text-align:center;margin-bottom:0.9rem}
+.section-title{font-family:var(--font-display);font-weight:800;font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-0.02em;text-align:center;line-height:1.2;max-width:780px;margin:0 auto}
+.section-sub{color:var(--muted);text-align:center;max-width:560px;margin:1rem auto 0;font-size:0.95rem}
+
+/* scroll-reveal: JS toggles .in-view */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin-orb{to{transform:rotate(360deg)}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 0 0 rgba(245,166,35,0.35)}50%{box-shadow:0 0 0 14px rgba(245,166,35,0)}}
+
+.sun-ring{position:absolute;border:1px solid;border-radius:50%;animation:spin-orb 30s linear infinite}
+
+/* ---------- BUTTONS ---------- */
+.btn-primary,.btn-ghost{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-family:var(--font-body);font-weight:600;font-size:0.92rem;
+  padding:0.85rem 1.7rem;border-radius:3rem;text-decoration:none;
+  transition:transform 0.25s,box-shadow 0.25s,background 0.25s,border-color 0.25s;
+  border:1px solid transparent;cursor:pointer;
 }
-#wa-float:hover { transform: scale(1.2) rotate(360deg); }
-#wa-float svg { width: 30px; fill: white; }
+.btn-primary{background:linear-gradient(135deg,var(--solar),var(--solar-hot));color:var(--void);box-shadow:0 10px 30px rgba(245,166,35,0.25)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(245,166,35,0.35)}
+.btn-ghost{background:transparent;border-color:var(--border);color:var(--white)}
+.btn-ghost:hover{border-color:var(--solar);background:rgba(245,166,35,0.08);transform:translateY(-3px)}
+.btn-primary.full,.btn-ghost.full{width:100%;justify-content:center}
+.btn-primary[disabled]{opacity:0.6;cursor:not-allowed;transform:none}
 
-.wa-bubble {
-  position: absolute; right: 70px; background: white; color: black;
-  padding: 8px 15px; border-radius: 15px 15px 0 15px; font-size: 0.8rem;
-  font-weight: 700; white-space: nowrap; opacity: 0; transform: translateX(20px);
-  transition: 0.3s; pointer-events: none;
+/* ---------- NAV ---------- */
+#topnav{
+  position:sticky;top:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 5%;
+  background:rgba(10,9,8,0.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
 }
-#wa-float.show-bubble .wa-bubble { opacity: 1; transform: translateX(0); }
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.3rem;text-decoration:none;color:var(--white);letter-spacing:-0.02em}
+.nav-logo span{color:var(--solar)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:0.88rem;font-weight:500;transition:color 0.2s;position:relative;padding:0.3rem 0}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--solar);transition:width 0.25s}
+.nav-links a:hover,.nav-links a.active{color:var(--white)}
+.nav-links a.active::after,.nav-links a:hover::after{width:100%}
+.nav-cta{text-decoration:none;background:linear-gradient(135deg,var(--solar),var(--solar-hot));color:var(--void);font-weight:700;font-size:0.85rem;padding:0.6rem 1.3rem;border-radius:2rem;transition:transform 0.2s,box-shadow 0.2s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,0.3)}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:0.4rem}
+.hamburger span{width:24px;height:2px;background:var(--white);border-radius:2px}
 
-/* SHARED FORM STYLES */
-.form-container { max-width: 600px; margin: 100px auto; padding: 40px 5%; background: var(--panel); border: 1px solid var(--border); border-radius: 20px; }
-.form-group { margin-bottom: 20px; }
-.form-group label { display: block; margin-bottom: 8px; color: var(--solar); font-weight: 600; }
-.form-group input, .form-group select, .form-group textarea {
-  width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-  padding: 12px; border-radius: 8px; color: white;
+.mobile-menu{position:fixed;inset:0;z-index:300;background:var(--void);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.8rem;transform:translateX(100%);transition:transform 0.4s cubic-bezier(.65,0,.35,1)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{text-decoration:none;color:var(--white);font-family:var(--font-display);font-size:1.5rem;font-weight:700}
+.mobile-close{position:absolute;top:1.4rem;right:6%;background:none;border:none;color:var(--white);font-size:1.6rem}
+
+@media(max-width:860px){
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+}
+
+/* ---------- TICKER ---------- */
+.ticker-wrap{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:0.9rem 0}
+.ticker-inner{display:flex;gap:3rem;white-space:nowrap;animation:ticker 28s linear infinite;width:max-content}
+.ticker-inner span{font-family:var(--font-display);font-weight:700;font-size:0.85rem;letter-spacing:0.04em;color:var(--muted);display:flex;align-items:center;gap:0.8rem}
+.ticker-inner span::after{content:'⚡';color:var(--solar)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- FOOTER ---------- */
+.site-footer{background:var(--deep);border-top:1px solid var(--border);padding:60px 5% 30px;text-align:center}
+.footer-logo{font-family:var(--font-display);font-weight:800;font-size:1.4rem}
+.footer-logo span{color:var(--solar)}
+.footer-tagline{color:var(--muted);font-size:0.88rem;margin-top:0.5rem}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:1.6rem;margin:2.2rem 0;font-size:0.85rem}
+.footer-links a{text-decoration:none;color:var(--muted);transition:color 0.2s}
+.footer-links a:hover{color:var(--solar)}
+.footer-copy{color:#5c564c;font-size:0.75rem;margin-top:1.5rem}
+
+/* ---------- generic page-header banner used on inner pages ---------- */
+.page-hero{padding:130px 5% 70px;text-align:center;position:relative;overflow:hidden}
+.page-hero .section-eye{margin-bottom:1rem}
+.page-hero h1{font-family:var(--font-display);font-weight:800;font-size:clamp(2.2rem,5.5vw,3.6rem);letter-spacing:-0.02em;line-height:1.1}
+.page-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--solar),var(--solar-hot));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-hero p{color:var(--muted);max-width:560px;margin:1.2rem auto 0;font-size:1rem}
+.crumb{display:flex;gap:0.5rem;justify-content:center;font-size:0.78rem;color:var(--muted);margin-bottom:1.2rem}
+.crumb a{text-decoration:none;color:var(--muted)}
+.crumb a:hover{color:var(--solar)}
+
+/* ---------- breadcrumb-style step badge re-used on quote pages ---------- */
+.spec-badges{display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;margin-top:1.6rem}
+.spec-badge{font-size:0.74rem;font-weight:600;color:var(--muted);border:1px solid var(--border);background:var(--panel);padding:0.35rem 0.9rem;border-radius:2rem}
+
+/* ============================================================
+   WHATSAPP FLOATING BUTTON
+   — sits bottom-right, fills a progress ring as the user scrolls
+     the page, pulses, and shows a rotating contextual speech bubble.
+   ============================================================ */
+#wa-float{
+  position:fixed;right:1.4rem;bottom:1.4rem;z-index:400;
+  display:flex;align-items:center;gap:0;
+}
+#wa-bubble{
+  background:var(--panel);border:1px solid var(--border);color:var(--white);
+  font-size:0.78rem;font-weight:500;padding:0.6rem 0.95rem;border-radius:1rem 1rem 0.2rem 1rem;
+  max-width:200px;margin-right:0.7rem;box-shadow:0 8px 24px rgba(0,0,0,0.35);
+  opacity:0;transform:translateY(8px) scale(0.92);transition:opacity 0.35s,transform 0.35s;
+  pointer-events:none;
+}
+#wa-bubble.show{opacity:1;transform:translateY(0) scale(1)}
+#wa-btn{
+  position:relative;width:62px;height:62px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,#3ddc7f,#1fae5c);
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;box-shadow:0 10px 28px rgba(0,201,122,0.4);
+  animation:waPulse 2.6s ease-in-out infinite;
+}
+#wa-btn svg{width:30px;height:30px;fill:#fff;position:relative;z-index:2}
+@keyframes waPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.wa-ring{position:absolute;inset:-5px;border-radius:50%}
+.wa-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.wa-ring circle{fill:none;stroke-width:3}
+.wa-ring .bg{stroke:rgba(255,255,255,0.08)}
+.wa-ring .fg{stroke:var(--solar);stroke-linecap:round;transition:stroke-dashoffset 0.1s linear}
+#wa-badge{
+  position:absolute;top:-4px;right:-4px;background:var(--solar-hot);color:var(--void);
+  font-size:0.65rem;font-weight:800;width:19px;height:19px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;border:2px solid var(--void);
+  opacity:0;transform:scale(0);transition:opacity 0.3s,transform 0.3s;
+}
+#wa-badge.show{opacity:1;transform:scale(1)}
+
+@media(max-width:600px){
+  #wa-bubble{display:none}
+  #wa-btn{width:54px;height:54px}
+  #wa-btn svg{width:26px;height:26px}
+}
+
+/* ============================================================
+   SHOCKY THE SKELETON — bottom-left scroll mascot
+   Idle: gentle bob. While the page is being scrolled: rattles,
+   limbs jitter, eyes turn to zig-zag bolts, sparks fly off him.
+   ============================================================ */
+#shocky-wrap{
+  position:fixed;left:0.6rem;bottom:1.2rem;z-index:390;
+  width:74px;height:90px;pointer-events:none;
+  transform:translateY(140%);transition:transform 0.5s cubic-bezier(.34,1.56,.64,1);
+}
+#shocky-wrap.armed{transform:translateY(0)}
+#shocky{width:100%;height:100%;animation:shockyIdle 2.8s ease-in-out infinite}
+@keyframes shockyIdle{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-5px) rotate(1deg)}}
+
+#shocky-wrap.shocked #shocky{animation:shockyJolt 0.18s steps(2) infinite}
+@keyframes shockyJolt{
+  0%{transform:translate(0,0) rotate(-4deg)}
+  25%{transform:translate(-3px,1px) rotate(5deg)}
+  50%{transform:translate(3px,-2px) rotate(-6deg)}
+  75%{transform:translate(-2px,2px) rotate(4deg)}
+  100%{transform:translate(2px,-1px) rotate(-3deg)}
+}
+.shocky-spark{opacity:0;transform-origin:center}
+#shocky-wrap.shocked .shocky-spark{opacity:1;animation:sparkFlicker 0.3s ease-in-out infinite alternate}
+@keyframes sparkFlicker{from{opacity:0.3;transform:scale(0.8) rotate(-8deg)}to{opacity:1;transform:scale(1.15) rotate(8deg)}}
+.shocky-eye-normal{opacity:1}
+.shocky-eye-shock{opacity:0}
+#shocky-wrap.shocked .shocky-eye-normal{opacity:0}
+#shocky-wrap.shocked .shocky-eye-shock{opacity:1}
+#shocky-speech{
+  position:absolute;bottom:96px;left:-10px;background:var(--panel);border:1px solid var(--border);
+  color:var(--white);font-size:0.68rem;font-weight:600;padding:0.35rem 0.6rem;border-radius:0.8rem 0.8rem 0.8rem 0.1rem;
+  white-space:nowrap;opacity:0;transition:opacity 0.3s;
+}
+#shocky-wrap.shocked #shocky-speech{opacity:1}
+
+@media(max-width:600px){
+  #shocky-wrap{width:54px;height:66px;left:0.4rem;bottom:0.9rem}
+  #shocky-speech{display:none}
 }
