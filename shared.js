@@ -1,50 +1,166 @@
-// shared.js
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Create Skeleton Element
-    const skelWrap = document.createElement('div');
-    skelWrap.id = 'skeleton-container';
-    skelWrap.innerHTML = `💀<br>🕺`; // Use an SVG or Icon for better look
-    document.body.appendChild(skelWrap);
+/* ============================================================
+   TUKNOVA ENTERPRISE — SHARED BEHAVIOUR
+   Included on every page. Page-specific scripts live inline
+   at the bottom of each HTML file.
+   ============================================================ */
 
-    // 2. WhatsApp Logic
-    const wa = document.createElement('a');
-    wa.id = 'wa-float';
-    wa.href = "https://wa.me/2349064859498";
-    wa.innerHTML = `<div class="wa-bubble">Hello! Tuknova here! 👋</div><svg viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.8 69.7 27.2 106.2 27.2h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.4-11.3 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.5-9.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.5 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>`;
-    document.body.appendChild(wa);
+const WA_NUMBER = '2349064859498';
 
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        const scrollDelta = currentScroll - lastScroll;
+/* Each page can set <body data-wa-msg="..."> for the default
+   WhatsApp message. Falls back to a generic greeting. */
+function waLink(msg){
+  const text = encodeURIComponent(msg || document.body.dataset.waMsg || "Hi Tuknova! I'd like a quote.");
+  return `https://wa.me/${WA_NUMBER}?text=${text}`;
+}
 
-        // 3. The Funny Dance & Shock Logic
-        if (Math.abs(scrollDelta) > 10) {
-            skelWrap.style.transform = `translateY(${Math.sin(currentScroll/10)*20}px) rotate(${Math.sin(currentScroll/5)*15}deg)`;
-            skelWrap.style.filter = `drop-shadow(0 0 10px #00d4ff) brightness(2)`;
-            createBolt();
-        } else {
-            skelWrap.style.filter = `none`;
-        }
-
-        // 4. WhatsApp Happiness Logic
-        if (currentScroll > 300) {
-            wa.classList.add('show-bubble');
-            wa.style.transform = `scale(${1 + Math.abs(Math.sin(currentScroll/50) * 0.2)})`;
-        } else {
-            wa.classList.remove('show-bubble');
-        }
-        lastScroll = currentScroll;
-    });
-
-    function createBolt() {
-        const bolt = document.createElement('div');
-        bolt.className = 'bolt';
-        bolt.style.left = (Math.random() * 80) + 'px';
-        bolt.style.top = (Math.random() * 100) + 'px';
-        bolt.style.height = (Math.random() * 30) + 'px';
-        skelWrap.appendChild(bolt);
-        bolt.style.opacity = '1';
-        setTimeout(() => bolt.remove(), 100);
-    }
+/* ---------- MOBILE MENU (ESC + outside click) ---------- */
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){const m=document.getElementById('mMenu');if(m)m.classList.remove('open');}
 });
+
+/* ---------- SCROLL REVEAL ---------- */
+const revealObserver = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){en.target.classList.add('in-view');revealObserver.unobserve(en.target);}
+  });
+},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+/* ============================================================
+   WHATSAPP FLOAT BUTTON — inject markup + wire behaviour
+   ============================================================ */
+(function initWaFloat(){
+  const wrap=document.createElement('div');
+  wrap.id='wa-float';
+  wrap.innerHTML=`
+    <div id="wa-bubble"></div>
+    <a id="wa-btn" href="${waLink()}" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+      <div class="wa-ring"><svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="29"/><circle class="fg" cx="32" cy="32" r="29" stroke-dasharray="182" stroke-dashoffset="182"/></svg></div>
+      <svg viewBox="0 0 32 32"><path d="M16 0C7.2 0 .1 7.1.1 15.9c0 2.8.7 5.5 2.1 7.9L0 32l8.4-2.2c2.3 1.3 4.9 1.9 7.6 1.9 8.8 0 15.9-7.1 15.9-15.9C31.9 7.1 24.8 0 16 0zm9.3 22.7c-.4 1.1-2.2 2.1-3 2.2-.8.1-1.7.4-5.8-1.2-4.9-1.9-8-6.9-8.3-7.2-.2-.3-2-2.6-2-5 0-2.4 1.3-3.5 1.7-4 .4-.4 1-.6 1.3-.6h.9c.3 0 .7 0 1 .8.4.9 1.3 3.2 1.4 3.4.1.2.2.5 0 .8-.1.3-.2.5-.4.7l-.7.8c-.2.2-.5.5-.2 1 .3.5 1.4 2.3 3 3.7 2 1.8 3.7 2.4 4.2 2.6.5.2.8.2 1.1-.1.3-.3 1.2-1.4 1.6-1.9.4-.5.7-.4 1.2-.2.5.2 3.1 1.5 3.7 1.7.6.3 1 .4 1.1.7.1.2.1 1.2-.3 2.3z"/></svg>
+      <div id="wa-badge">1</div>
+    </a>`;
+  document.body.appendChild(wrap);
+
+  const fg=wrap.querySelector('.wa-ring .fg');
+  const bubble=document.getElementById('wa-bubble');
+  const badge=document.getElementById('wa-badge');
+  const CIRC=182;
+
+  const msgs = window.WA_CONTEXT_MSGS || [
+    "Need a quote? Tap to chat 👋",
+    "We reply in minutes ⚡",
+    "Free advice, no pressure 🙂",
+    "Tap to ask us anything"
+  ];
+  let msgIdx=0, bubbleTimer=null, hideTimer=null, badgeShown=false;
+
+  function showBubble(){
+    bubble.textContent=msgs[msgIdx % msgs.length];
+    msgIdx++;
+    bubble.classList.add('show');
+    clearTimeout(hideTimer);
+    hideTimer=setTimeout(()=>bubble.classList.remove('show'),3600);
+  }
+
+  function updateProgress(){
+    const h=document.documentElement;
+    const scrolled=h.scrollTop;
+    const max=h.scrollHeight-h.clientHeight;
+    const pct=max>0?Math.min(1,scrolled/max):0;
+    fg.style.strokeDashoffset=String(CIRC-CIRC*pct);
+
+    if(pct>0.25 && !badgeShown){
+      badgeShown=true;
+      badge.classList.add('show');
+    }
+    if(pct>0.5 && !bubble.classList.contains('show') && !window.__waBubbleAuto){
+      window.__waBubbleAuto=true;
+      showBubble();
+    }
+  }
+
+  let waTicking=false;
+  window.addEventListener('scroll',()=>{
+    if(!waTicking){window.requestAnimationFrame(()=>{updateProgress();waTicking=false;});waTicking=true;}
+  },{passive:true});
+  updateProgress();
+
+  wrap.addEventListener('mouseenter',()=>{ if(!bubble.classList.contains('show')) showBubble(); });
+  document.getElementById('wa-btn').addEventListener('click',()=>{
+    badge.classList.remove('show');
+  });
+
+  // gentle periodic nudge so the button "tracks" the user happily
+  clearInterval(bubbleTimer);
+  bubbleTimer=setInterval(()=>{ if(!bubble.classList.contains('show')) showBubble(); },14000);
+})();
+
+/* ============================================================
+   SHOCKY THE SKELETON — scroll-triggered dancing mascot
+   ============================================================ */
+(function initShocky(){
+  const wrap=document.createElement('div');
+  wrap.id='shocky-wrap';
+  wrap.innerHTML=`
+    <div id="shocky-speech">Zzzzap!</div>
+    <svg id="shocky" viewBox="0 0 74 90" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="37" cy="84" rx="16" ry="4" fill="rgba(0,0,0,0.35)"/>
+      <g class="shocky-spark">
+        <path d="M8 18 L16 26 L10 28 L20 38" stroke="#00d4ff" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M66 22 L58 30 L64 32 L54 42" stroke="#f5a623" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M37 2 L33 12 L39 13 L34 22" stroke="#00d4ff" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <!-- legs -->
+      <line x1="30" y1="68" x2="25" y2="82" stroke="#e9e3d6" stroke-width="4" stroke-linecap="round"/>
+      <line x1="44" y1="68" x2="49" y2="82" stroke="#e9e3d6" stroke-width="4" stroke-linecap="round"/>
+      <!-- arms -->
+      <line x1="24" y1="48" x2="10" y2="38" stroke="#e9e3d6" stroke-width="4" stroke-linecap="round"/>
+      <line x1="50" y1="48" x2="64" y2="38" stroke="#e9e3d6" stroke-width="4" stroke-linecap="round"/>
+      <!-- ribcage -->
+      <rect x="26" y="44" width="22" height="22" rx="6" fill="#0d0b09" stroke="#e9e3d6" stroke-width="2.5"/>
+      <line x1="29" y1="50" x2="45" y2="50" stroke="#e9e3d6" stroke-width="1.6"/>
+      <line x1="29" y1="55" x2="45" y2="55" stroke="#e9e3d6" stroke-width="1.6"/>
+      <line x1="29" y1="60" x2="45" y2="60" stroke="#e9e3d6" stroke-width="1.6"/>
+      <!-- head -->
+      <circle cx="37" cy="26" r="17" fill="#e9e3d6"/>
+      <g class="shocky-eye-normal">
+        <circle cx="30" cy="25" r="2.6" fill="#0a0908"/>
+        <circle cx="44" cy="25" r="2.6" fill="#0a0908"/>
+        <path d="M31 34 Q37 38 43 34" stroke="#0a0908" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g class="shocky-eye-shock">
+        <path d="M27 22 L32 25 L28 26 L33 30" stroke="#00d4ff" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M47 22 L42 25 L46 26 L41 30" stroke="#00d4ff" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="37" cy="34" rx="4" ry="3" fill="#0a0908"/>
+      </g>
+    </svg>`;
+  document.body.appendChild(wrap);
+
+  const speech=document.getElementById('shocky-speech');
+  const lines=["Zzzzap!","Whoa, easy!","I felt that ⚡","Current mood: shocked","Keep scrolling!","Ouch-tastic!"];
+  let armed=false, shockTimeout=null, idleTimeout=null;
+
+  function arm(){
+    if(armed) return;
+    armed=true;
+    wrap.classList.add('armed');
+  }
+
+  function zap(){
+    arm();
+    wrap.classList.add('shocked');
+    speech.textContent=lines[Math.floor(Math.random()*lines.length)];
+    clearTimeout(shockTimeout);
+    shockTimeout=setTimeout(()=>wrap.classList.remove('shocked'),650);
+    // after a while of no scrolling at all, let him rest off-screen-ish (stay docked though)
+    clearTimeout(idleTimeout);
+  }
+
+  let shockyTicking=false;
+  window.addEventListener('scroll',()=>{
+    if(!shockyTicking){
+      window.requestAnimationFrame(()=>{zap();shockyTicking=false;});
+      shockyTicking=true;
+    }
+  },{passive:true});
+})();
