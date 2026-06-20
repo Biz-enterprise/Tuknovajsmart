@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CCTV Camera Quote — Tuknova Enterprise Nigeria</title>
+<meta name="description" content="Get HD CCTV camera quote for home, office or shop. Night vision, remote viewing, full installation. WhatsApp quote instantly."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.page-hero{min-height:60vh;display:flex;align-items:center;padding:130px 5% 70px;position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(255,124,26,0.1) 0%,transparent 70%)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,124,26,.1);border:1px solid rgba(255,124,26,.3);color:var(--solar-hot);font-size:.72rem;font-weight:700;padding:.4rem 1rem;border-radius:2rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;animation:fadeUp .6s ease both}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.6rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;animation:fadeUp .7s .1s ease both}
+.accent-hot{color:var(--solar-hot)}
+.hero-sub{color:var(--muted);font-size:1rem;margin:1rem 0 1.5rem;max-width:460px;animation:fadeUp .8s .2s ease both}
+.feats{display:flex;gap:1.4rem;flex-wrap:wrap;animation:fadeUp .9s .3s ease both}
+.feat{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--muted)}.feat span{color:var(--solar-hot)}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(255,124,26,.1);animation:pulse-ring 4s ease-in-out infinite}
+main{max-width:780px;margin:0 auto;padding:3rem 5% 6rem}
+.venue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.8rem;margin-bottom:2rem}
+.venue-btn{background:var(--panel);border:2px solid var(--border);border-radius:12px;padding:1.1rem .6rem;cursor:pointer;text-align:center;transition:all .25s;color:var(--white)}
+.venue-btn:hover{border-color:rgba(255,124,26,.4);transform:translateY(-2px)}
+.venue-btn.sel{border-color:var(--solar-hot);background:rgba(255,124,26,.07);box-shadow:0 0 18px rgba(255,124,26,.15)}
+.venue-icon{font-size:1.8rem;display:block;margin-bottom:.4rem}
+.venue-name{font-size:.8rem;font-weight:700;font-family:var(--font-display)}
+.cam-count-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:.6rem;margin-bottom:2rem}
+.count-btn{background:var(--panel);border:2px solid var(--border);border-radius:10px;padding:.9rem .4rem;cursor:pointer;text-align:center;transition:all .25s;color:var(--white);font-family:var(--font-display);font-weight:700}
+.count-btn:hover{border-color:rgba(255,124,26,.4)}
+.count-btn.sel{border-color:var(--solar-hot);background:rgba(255,124,26,.07)}
+.count-num{font-size:1.1rem;color:var(--solar-hot)}
+.count-lbl{font-size:.65rem;color:var(--muted);margin-top:.2rem}
+.form-section{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:2.5rem;margin-bottom:2rem}
+.form-section h2{font-family:var(--font-display);font-size:1.15rem;font-weight:800;margin-bottom:.4rem}
+.form-section p{color:var(--muted);font-size:.88rem;margin-bottom:2rem}
+.slabel{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--solar-hot);margin:1.5rem 0 .8rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);display:block}
+.btn-submit-hot{width:100%;background:linear-gradient(135deg,var(--solar-hot),var(--solar));color:var(--void);border:none;padding:1rem;border-radius:10px;font-weight:800;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:.5rem}
+.btn-submit-hot:hover{transform:scale(1.02);box-shadow:0 0 30px rgba(255,124,26,.4)}
+.wa-success{display:none;background:linear-gradient(135deg,rgba(37,211,102,.12),rgba(37,211,102,.04));border:1px solid rgba(37,211,102,.3);border-radius:16px;padding:2.5rem;text-align:center}
+.wa-success h3{font-family:var(--font-display);font-size:1.2rem;font-weight:800;margin-bottom:.5rem}
+.wa-success p{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem}
+.cam-feature-check{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.7rem;margin-bottom:1.5rem}
+.cfc-item{display:flex;align-items:center;gap:.6rem;background:var(--deep);border:1px solid var(--border);border-radius:8px;padding:.7rem;cursor:pointer;transition:all .2s}
+.cfc-item:hover{border-color:rgba(255,124,26,.3)}
+.cfc-item.checked{border-color:var(--solar-hot);background:rgba(255,124,26,.06)}
+.cfc-box{width:18px;height:18px;border:2px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.cfc-item.checked .cfc-box{border-color:var(--solar-hot);background:var(--solar-hot)}
+.cfc-lbl{font-size:.8rem;font-weight:600}
+.other-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:1rem}
+.other-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;text-decoration:none;color:var(--white);transition:all .25s;display:block}
+.other-card:hover{border-color:rgba(245,166,35,.4);transform:translateY(-2px)}
+</style>
+</head>
+<body>
+<nav class="t-nav" id="navbar">
+  <a class="t-logo" href="index.html">Tuk<span>nova</span></a>
+  <ul class="t-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="solar.html">Solar</a></li>
+    <li><a href="inverter.html">Inverter</a></li>
+    <li><a href="battery.html">Battery</a></li>
+    <li><a href="camera.html" class="active">CCTV</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a class="t-cta" href="solar.html">Get Quote</a>
+  <button class="t-hamburger" onclick="openMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="t-mobile" id="tMobile">
+  <button class="t-close" onclick="closeMenu()">✕</button>
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="solar.html" onclick="closeMenu()">Solar</a>
+  <a href="inverter.html" onclick="closeMenu()">Inverter</a>
+  <a href="battery.html" onclick="closeMenu()">Battery</a>
+  <a href="camera.html" onclick="closeMenu()">CCTV</a>
+  <a href="products.html" onclick="closeMenu()">Products</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<section class="page-hero">
+  <div class="ring" style="width:380px;height:380px;top:-5%;right:-3%"></div>
+  <div class="ring" style="width:560px;height:560px;top:-15%;right:-10%;animation-delay:2s"></div>
+  <div>
+    <div class="hero-badge">📷 CCTV Security Cameras — Always Watching</div>
+    <h1 class="hero-title">Secure Your Home,<br/>Shop &amp; Office<br/><span class="accent-hot">24/7</span></h1>
+    <p class="hero-sub">HD cameras, night vision, remote mobile viewing, DVR/NVR kits. Professional installation across Nigeria.</p>
+    <div class="feats">
+      <div class="feat"><span>✓</span> HD to 4K resolution</div>
+      <div class="feat"><span>✓</span> Night vision</div>
+      <div class="feat"><span>✓</span> Watch from your phone</div>
+      <div class="feat"><span>✓</span> Full installation</div>
+    </div>
+  </div>
+</section>
+<div class="ticker-wrap"><div class="ticker-inner"><span>HD Cameras</span><span>4K Resolution</span><span>Night Vision</span><span>Remote Viewing</span><span>DVR Systems</span><span>NVR Systems</span><span>IP Cameras</span><span>Motion Detection</span><span>Full Installation</span><span>HD Cameras</span><span>4K Resolution</span><span>Night Vision</span><span>Remote Viewing</span><span>DVR Systems</span><span>NVR Systems</span><span>IP Cameras</span><span>Motion Detection</span><span>Full Installation</span></div></div>
+<main>
+  <div class="form-section reveal" id="camFormCard">
+    <h2>📷 CCTV Camera Quote Request</h2>
+    <p>Answer a few quick questions and your full camera spec goes to our WhatsApp. We reply with the exact price fast.</p>
+
+    <span class="slabel">Where are the cameras going?</span>
+    <div class="venue-grid">
+      <div class="venue-btn" onclick="selVenue(this,'My House / Home')"><span class="venue-icon">🏠</span><div class="venue-name">Home</div></div>
+      <div class="venue-btn" onclick="selVenue(this,'My Shop / Store')"><span class="venue-icon">🏪</span><div class="venue-name">Shop</div></div>
+      <div class="venue-btn" onclick="selVenue(this,'Office / Company')"><span class="venue-icon">🏢</span><div class="venue-name">Office</div></div>
+      <div class="venue-btn" onclick="selVenue(this,'Warehouse / Factory')"><span class="venue-icon">🏭</span><div class="venue-name">Warehouse</div></div>
+      <div class="venue-btn" onclick="selVenue(this,'Church / Mosque / School')"><span class="venue-icon">⛪</span><div class="venue-name">Church/School</div></div>
+      <div class="venue-btn" onclick="selVenue(this,'Multiple locations')"><span class="venue-icon">📍</span><div class="venue-name">Multiple</div></div>
+    </div>
+
+    <span class="slabel">How many cameras do you need?</span>
+    <div class="cam-count-grid">
+      <div class="count-btn" onclick="selCount(this,'1-2 cameras')"><div class="count-num">1–2</div><div class="count-lbl">cameras</div></div>
+      <div class="count-btn" onclick="selCount(this,'3-4 cameras')"><div class="count-num">3–4</div><div class="count-lbl">cameras</div></div>
+      <div class="count-btn" onclick="selCount(this,'5-8 cameras')"><div class="count-num">5–8</div><div class="count-lbl">cameras</div></div>
+      <div class="count-btn" onclick="selCount(this,'9-16 cameras')"><div class="count-num">9–16</div><div class="count-lbl">cameras</div></div>
+      <div class="count-btn" onclick="selCount(this,'16+ cameras (large site)')"><div class="count-num">16+</div><div class="count-lbl">large site</div></div>
+      <div class="count-btn" onclick="selCount(this,'Not sure — advise me')"><div class="count-num">?</div><div class="count-lbl">not sure</div></div>
+    </div>
+
+    <span class="slabel">Which features do you need?</span>
+    <div class="cam-feature-check">
+      <div class="cfc-item" onclick="toggleFeat(this)"><div class="cfc-box"></div><span class="cfc-lbl">Night Vision</span></div>
+      <div class="cfc-item" onclick="toggleFeat(this)"><div class="cfc-box"></div><span class="cfc-lbl">Remote Mobile Viewing</span></div>
+      <div class="cfc-item" onclick="toggleFeat(this)"><div class="cfc-box"></div><span class="cfc-lbl">Motion Detection</span></div>
+      <div class="cfc-item" onclick="toggleFeat(this)"><div class="cfc-box"></div><span class="cfc-lbl">Audio Recording</span></div>
+      <div class="cfc-item" onclick="toggleFeat(this)"><div class="cfc-box"></div><span class="cfc-lbl">Colour Night Vision</span></div>
+      <div class="cfc-item" onclick="toggleFeat(this)"><div class="cfc-box"></div><span class="cfc-lbl">Weatherproof / Outdoor</span></div>
+      <div class="cfc-item" onclick="toggleFeat(this)"><div class="cfc-box"></div><span class="cfc-lbl">AI Alerts to Phone</span></div>
+      <div class="cfc-item" onclick="toggleFeat(this)"><div class="cfc-box"></div><span class="cfc-lbl">360° Pan/Tilt Camera</span></div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label">Camera Resolution</label>
+        <select class="field-select" id="camRes">
+          <option>HD 2MP (Standard, great quality)</option>
+          <option>Full HD 4MP (Clearer, recommended)</option>
+          <option>4K 8MP (Highest quality)</option>
+          <option>Not sure — recommend best value</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Installation Needed?</label>
+        <select class="field-select" id="camInst">
+          <option>Yes — full installation please</option>
+          <option>No — supply only</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Extra Notes (optional)</label>
+      <input class="field-input" type="text" id="camNotes" placeholder="e.g. Big compound, need long cable runs, already have DVR..."/>
+    </div>
+
+    <span class="slabel">Your Contact Details</span>
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label">Full Name</label>
+        <input class="field-input" type="text" id="camName" placeholder="e.g. Sani Danjuma"/>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Phone Number *</label>
+        <input class="field-input" type="tel" id="camPhone" placeholder="e.g. 08012345678"/>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Your Location</label>
+      <input class="field-input" type="text" id="camCity" placeholder="e.g. Jos, Plateau State"/>
+    </div>
+    <button class="btn-submit-hot" onclick="submitCam()">📷 Send Camera Quote to WhatsApp</button>
+  </div>
+
+  <div class="wa-success" id="camSuccess">
+    <div style="font-size:2.5rem;margin-bottom:.8rem">✅</div>
+    <h3>Camera Quote Sent to WhatsApp!</h3>
+    <p>Your full camera specifications have been sent to our team. We reply with exact pricing within minutes.</p>
+    <a class="btn-wa" id="camWaLink" href="#" target="_blank">Re-open WhatsApp</a>
+    <br/><button onclick="resetCam()" style="margin-top:1rem;background:transparent;border:1px solid var(--border);color:var(--muted);padding:.6rem 1.4rem;border-radius:2rem;font-size:.82rem;cursor:pointer">New Quote</button>
+  </div>
+
+  <div style="padding-top:2rem;border-top:1px solid var(--border)">
+    <div style="font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--muted);margin-bottom:1rem">Also from Tuknova</div>
+    <div class="other-grid">
+      <a href="solar.html" class="other-card"><div style="font-size:1.8rem">🌞</div><div style="font-family:var(--font-display);font-size:.85rem;font-weight:700;margin-top:.3rem">Solar System</div></a>
+      <a href="inverter.html" class="other-card"><div style="font-size:1.8rem">🔌</div><div style="font-family:var(--font-display);font-size:.85rem;font-weight:700;margin-top:.3rem">Inverter</div></a>
+      <a href="battery.html" class="other-card"><div style="font-size:1.8rem">🔋</div><div style="font-family:var(--font-display);font-size:.85rem;font-weight:700;margin-top:.3rem">Battery</div></a>
+    </div>
+  </div>
+</main>
+
+<footer class="t-footer">
+  <div class="t-footer-logo">Tuk<span>nova</span> Enterprise</div>
+  <p class="t-footer-tagline">Powering Homes & Securing Lives Across Nigeria</p>
+  <div class="t-footer-links">
+    <a href="index.html">Home</a><a href="solar.html">Solar</a><a href="inverter.html">Inverter</a>
+    <a href="battery.html">Battery</a><a href="camera.html">CCTV</a>
+    <a href="products.html">Products</a><a href="contact.html">Contact</a>
+  </div>
+  <p class="t-footer-copy">2025 Tuknova Enterprise Lagos Nigeria</p>
+</footer>
+<script>
+let selVenueVal='', selCountVal='';
+function selVenue(el,v){document.querySelectorAll('.venue-btn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');selVenueVal=v;}
+function selCount(el,v){document.querySelectorAll('.count-btn').forEach(b=>b.classList.remove('sel'));el.classList.add('sel');selCountVal=v;}
+function toggleFeat(el){el.classList.toggle('checked');const box=el.querySelector('.cfc-box');if(el.classList.contains('checked')){box.innerHTML='<svg width=10 height=10 viewBox="0 0 10 10"><polyline points="1,5 4,8 9,2" stroke="white" stroke-width="2" fill="none"/></svg>';}else{box.innerHTML='';}}
+function getFeats(){return [...document.querySelectorAll('.cfc-item.checked')].map(el=>el.querySelector('.cfc-lbl').textContent).join(', ')||'Standard package';}
+function submitCam(){
+  const phone=document.getElementById('camPhone').value.trim();
+  if(!phone){alert('Please enter your phone number.');return;}
+  const name=document.getElementById('camName').value.trim();
+  const city=document.getElementById('camCity').value.trim();
+  const res=document.getElementById('camRes').value;
+  const inst=document.getElementById('camInst').value;
+  const notes=document.getElementById('camNotes').value.trim();
+  const feats=getFeats();
+  const msg="CCTV CAMERA QUOTE REQUEST - TUKNOVA WEBSITE\n" +
+    "Customer: "+(name||'Not provided')+"\n" +
+    "Phone: "+phone+"\n" +
+    "Location: "+(city||'Not provided')+"\n\n" +
+    "CAMERA DETAILS\n" +
+    "Venue: "+(selVenueVal||'Not specified')+"\n" +
+    "Number of Cameras: "+(selCountVal||'Not specified')+"\n" +
+    "Resolution: "+res+"\n" +
+    "Features Needed: "+feats+"\n" +
+    "Installation: "+inst+"\n" +
+    (notes?"Extra Notes: "+notes+"\n":"") +
+    "\nPlease send me the Naira price quote. Thank you!";
+  const url="https://wa.me/2349064859498?text="+encodeURIComponent(msg);
+  window.open(url,'_blank');
+  document.getElementById('camWaLink').href=url;
+  document.getElementById('camFormCard').style.display='none';
+  document.getElementById('camSuccess').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function resetCam(){
+  document.getElementById('camFormCard').style.display='block';
+  document.getElementById('camSuccess').style.display='none';
+  document.getElementById('camPhone').value='';
+  document.getElementById('camName').value='';
+  document.getElementById('camCity').value='';
+  document.getElementById('camNotes').value='';
+  document.querySelectorAll('.venue-btn,.count-btn').forEach(b=>b.classList.remove('sel'));
+  document.querySelectorAll('.cfc-item').forEach(el=>{el.classList.remove('checked');el.querySelector('.cfc-box').innerHTML='';});
+  selVenueVal='';selCountVal='';
+}
+// ═══════════════════════════════════════
+// TUKNOVA SHARED JS — included in all pages
+// ═══════════════════════════════════════
+
+// Nav mobile
+function openMenu() { document.getElementById('tMobile').classList.add('open'); }
+function closeMenu() { document.getElementById('tMobile').classList.remove('open'); }
+
+// Set active nav link
+(function(){
+  const page = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.t-links a').forEach(a => {
+    if(a.getAttribute('href') === page) a.classList.add('active');
+  });
+})();
+
+</script>
+<script src="shared.js"></script>
+</body>
+</html>

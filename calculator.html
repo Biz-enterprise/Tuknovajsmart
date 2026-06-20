@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Solar Calculator — Tuknova Enterprise</title>
+<meta name="description" content="Free solar load calculator. Find out how many panels, inverter size and batteries you need. Instant WhatsApp quote."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.calc-hero{padding:120px 5% 50px;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(245,166,35,0.1) 0%,transparent 70%)}
+.calc-hero h1{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.2rem);font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin-bottom:0.8rem}
+.calc-hero h1 span{color:var(--solar)}
+.calc-hero p{color:var(--muted);max-width:500px;font-size:0.97rem}
+main{max-width:880px;margin:0 auto;padding:2rem 5% 6rem}
+/* TABS */
+.tab-row{display:flex;gap:0.5rem;background:var(--deep);border:1px solid var(--border);border-radius:14px;padding:0.4rem;margin-bottom:2.5rem;flex-wrap:wrap}
+.tab-btn{flex:1;min-width:120px;padding:0.7rem 1rem;border:none;background:transparent;color:var(--muted);font-family:var(--font-body);font-size:0.82rem;font-weight:600;cursor:pointer;border-radius:10px;transition:all 0.2s;white-space:nowrap}
+.tab-btn.active{background:var(--solar);color:var(--void);box-shadow:0 4px 12px rgba(245,166,35,0.3)}
+.tab-panel{display:none}.tab-panel.active{display:block;animation:fadeUp 0.35s ease}
+/* APPLIANCE GRID */
+.app-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:0.75rem;margin-bottom:1.5rem}
+.app-card{background:var(--panel);border:1.5px solid var(--border);border-radius:12px;padding:0.9rem 0.8rem;display:flex;flex-direction:column;gap:0.4rem;transition:all 0.2s}
+.app-card.active{border-color:var(--solar);background:rgba(245,166,35,0.05)}
+.app-icon{font-size:1.4rem}
+.app-name{font-size:0.78rem;font-weight:600;color:var(--white)}
+.app-watt{font-size:0.65rem;color:var(--muted)}
+.app-ctrl{display:flex;align-items:center;gap:0.5rem;margin-top:0.3rem}
+.qb{width:26px;height:26px;border-radius:50%;background:var(--border);color:var(--white);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
+.qb:hover{background:var(--solar);color:var(--void)}
+.qv{font-size:0.85rem;font-weight:800;min-width:18px;text-align:center;color:var(--solar)}
+/* LIVE BAR */
+.live-bar{background:var(--deep);border:1px solid rgba(245,166,35,0.2);border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;margin-bottom:1.5rem;position:sticky;top:70px;z-index:50;backdrop-filter:blur(10px)}
+.lb-stat{text-align:center}
+.lb-val{font-family:var(--font-display);font-size:1.1rem;font-weight:800;color:var(--solar)}
+.lb-lbl{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
+/* PROGRESS */
+.prog-bar{height:6px;background:var(--border);border-radius:3px;margin-bottom:2rem;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--solar),var(--solar-hot));border-radius:3px;transition:width 0.5s ease}
+/* RESULT GRID */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin:1.5rem 0}
+.res-card{background:var(--deep);border:1px solid var(--border);border-radius:14px;padding:1.2rem;text-align:center}
+.rc-icon{font-size:1.8rem;display:block;margin-bottom:0.3rem}
+.rc-val{font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--solar)}
+.rc-unit{font-size:0.7rem;color:var(--muted)}
+.rc-label{font-size:0.78rem;font-weight:600;margin-top:0.3rem}
+/* FORM ROWS */
+.field-group{margin-bottom:1.1rem}
+.field-label{display:block;font-size:0.75rem;font-weight:700;color:var(--muted);margin-bottom:0.4rem;letter-spacing:0.06em;text-transform:uppercase}
+.field-input,.field-select{width:100%;background:var(--deep);border:1.5px solid var(--border);color:var(--white);border-radius:10px;padding:0.72rem 1rem;font-family:var(--font-body);font-size:0.9rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;appearance:none}
+.field-input:focus,.field-select:focus{border-color:var(--solar);box-shadow:0 0 0 3px rgba(245,166,35,0.1)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-go{width:100%;background:linear-gradient(135deg,var(--solar),var(--solar-hot));color:var(--void);border:none;padding:1rem;border-radius:10px;font-weight:800;font-size:1rem;cursor:pointer;transition:all 0.2s;margin-top:0.5rem;box-shadow:0 0 24px rgba(245,166,35,0.3)}
+.btn-go:hover{transform:scale(1.02);box-shadow:0 0 36px rgba(245,166,35,0.5)}
+.wa-result-box{background:linear-gradient(135deg,rgba(37,211,102,0.1),rgba(37,211,102,0.04));border:1px solid rgba(37,211,102,0.3);border-radius:16px;padding:2rem;text-align:center;margin:1.5rem 0}
+.wa-result-box h3{font-family:var(--font-display);font-size:1.1rem;font-weight:800;margin-bottom:0.5rem}
+.wa-result-box p{color:var(--muted);font-size:0.87rem;line-height:1.6;margin-bottom:1.2rem}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px){.field-row{grid-template-columns:1fr}.tab-btn{font-size:0.75rem;padding:0.6rem 0.5rem}}
+</style>
+</head>
+<body>
+<nav id="topnav">
+  <a class="nav-logo" href="index.html">Tuk<span>nova</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="calculator.html" class="active">Calculator</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="contact.html">📞 Contact Us</a>
+  <button class="hamburger" onclick="document.getElementById('mM').classList.add('open')"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mM">
+  <button class="mobile-close" onclick="document.getElementById('mM').classList.remove('open')">✕</button>
+  <a href="index.html" onclick="document.getElementById('mM').classList.remove('open')">Home</a>
+  <a href="products.html" onclick="document.getElementById('mM').classList.remove('open')">Products</a>
+  <a href="calculator.html" onclick="document.getElementById('mM').classList.remove('open')">Calculator</a>
+  <a href="contact.html" onclick="document.getElementById('mM').classList.remove('open')">Contact</a>
+</div>
+
+<div class="calc-hero">
+  <h1>Free Solar <span>Load Calculator</span></h1>
+  <p>Tell us your appliances — we calculate the exact panels, inverter and batteries needed. All 4 quote types in one place.</p>
+</div>
+
+<main>
+  <!-- TABS -->
+  <div class="tab-row">
+    <button class="tab-btn active" onclick="switchTab('solar',this)">🌞 Full Solar System</button>
+    <button class="tab-btn" onclick="switchTab('inverter',this)">🔌 Inverter Only</button>
+    <button class="tab-btn" onclick="switchTab('battery',this)">🔋 Battery Only</button>
+    <button class="tab-btn" onclick="switchTab('camera',this)">📷 CCTV Camera</button>
+  </div>
+
+  <!-- SOLAR TAB -->
+  <div class="tab-panel active" id="tab-solar">
+    <!-- Sticky live bar -->
+    <div class="live-bar">
+      <div class="lb-stat"><div class="lb-val" id="lLoad">0W</div><div class="lb-lbl">Total Load</div></div>
+      <div class="lb-stat"><div class="lb-val" id="lItems">0</div><div class="lb-lbl">Items</div></div>
+      <div class="lb-stat"><div class="lb-val" id="lInv">—</div><div class="lb-lbl">Est. Inverter</div></div>
+      <div class="lb-stat"><div class="lb-val" id="lPanels">—</div><div class="lb-lbl">Est. Panels</div></div>
+      <div style="font-size:0.72rem;color:var(--muted)">Updates live as you add appliances ↑</div>
+    </div>
+    <div style="font-family:var(--font-display);font-size:0.9rem;font-weight:700;color:var(--solar);margin-bottom:1rem">Select Your Appliances</div>
+    <div class="app-grid" id="appGrid"></div>
+    <div style="background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-top:1rem">
+      <div style="font-family:var(--font-display);font-size:0.9rem;font-weight:700;color:var(--solar);margin-bottom:1rem">⚙️ Usage Preferences</div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Backup Hours/Day</label><select class="field-select" id="uHours"><option value="4">~4 hours/day</option><option value="8" selected>~8 hours/day</option><option value="12">~12 hours/day</option><option value="24">Full 24hr off-grid</option></select></div>
+        <div class="field-group"><label class="field-label">Your Location</label><select class="field-select" id="uLoc"><option value="4.5">Northern Nigeria</option><option value="5" selected>Lagos / South-West</option><option value="5">Abuja / North-Central</option><option value="4">South-East / South-South</option></select></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Battery Type</label><select class="field-select" id="uBatt"><option value="agm">AGM / Gel — Standard</option><option value="lithium">Lithium LiFePO4 — Premium</option></select></div>
+        <div class="field-group"><label class="field-label">Backup Days</label><select class="field-select" id="uDays"><option value="1" selected>1 day</option><option value="2">2 days</option><option value="3">3 days</option></select></div>
+      </div>
+      <div class="field-group"><label class="field-label">Installation Needed?</label><select class="field-select" id="uInst"><option value="yes">Yes — install everything for me</option><option value="no">No — supply only</option><option value="maybe">Not sure yet</option></select></div>
+      <div style="border-top:1px solid var(--border);padding-top:1.2rem;margin-top:0.5rem;font-family:var(--font-display);font-size:0.9rem;font-weight:700;color:var(--solar);margin-bottom:1rem">👤 Your Details</div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Your Name</label><input class="field-input" type="text" id="uName" placeholder="e.g. Emeka Johnson"/></div>
+        <div class="field-group"><label class="field-label">Phone Number *</label><input class="field-input" type="tel" id="uPhone" placeholder="e.g. 08012345678"/></div>
+      </div>
+      <div class="field-group"><label class="field-label">Your State / City</label><input class="field-input" type="text" id="uCity" placeholder="e.g. Ikeja, Lagos"/></div>
+      <button class="btn-go" onclick="calcSolar()">⚡ Calculate & Send Quote to WhatsApp</button>
+    </div>
+    <!-- Result -->
+    <div id="solarResult" style="display:none;margin-top:2rem">
+      <div class="res-grid" id="sResCards"></div>
+      <div class="wa-result-box">
+        <div style="font-size:2rem;margin-bottom:0.6rem">💬</div>
+        <h3>Your Quote is Ready!</h3>
+        <p>All your details are packaged. Tap below — we'll reply with your exact Naira price in minutes.</p>
+        <a class="btn-wa" id="sWaBtn" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2rem">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Send to WhatsApp & Get Price
+        </a>
+        <p style="font-size:0.72rem;color:var(--muted);margin-top:0.6rem">⚡ Reply under 5 min · Mon–Sat 8AM–6PM</p>
+      </div>
+      <button onclick="resetSolar()" style="background:transparent;border:1px solid var(--border);color:var(--muted);padding:0.6rem 1.4rem;border-radius:2rem;font-size:0.82rem;cursor:pointer;display:block;margin:0 auto">🔄 Recalculate</button>
+    </div>
+  </div>
+
+  <!-- INVERTER TAB -->
+  <div class="tab-panel" id="tab-inverter">
+    <div style="background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:2rem">
+      <div style="font-family:var(--font-display);font-size:0.9rem;font-weight:700;color:var(--arc);margin-bottom:1.2rem">🔌 Inverter Quote Details</div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Inverter Size</label><select class="field-select" id="iSize"><option>1KVA</option><option>2KVA</option><option>3KVA</option><option>5KVA</option><option>7.5KVA</option><option>10KVA</option><option>Not sure — advise me</option></select></div>
+        <div class="field-group"><label class="field-label">Inverter Type</label><select class="field-select" id="iType"><option>Pure Sine Wave</option><option>Hybrid MPPT</option><option>Not sure — recommend</option></select></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Load / Usage</label><select class="field-select" id="iLoad"><option>Basic home (lights, fans, TV)</option><option>Medium home (+ fridge)</option><option>Full home (+ AC, washing machine)</option><option>Office/shop</option></select></div>
+        <div class="field-group"><label class="field-label">Installation</label><select class="field-select" id="iInst"><option>Yes — install it</option><option>No — buying only</option></select></div>
+      </div>
+      <div class="field-group"><label class="field-label">Brand Preference</label><input class="field-input" type="text" id="iBrand" placeholder="Felicity, Growatt, Luminous... or leave blank"/></div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Your Name</label><input class="field-input" type="text" id="iName" placeholder="e.g. Tunde"/></div>
+        <div class="field-group"><label class="field-label">Phone *</label><input class="field-input" type="tel" id="iPhone" placeholder="08012345678"/></div>
+      </div>
+      <div class="field-group"><label class="field-label">Location</label><input class="field-input" type="text" id="iCity" placeholder="e.g. Surulere, Lagos"/></div>
+      <div class="field-group"><label class="field-label">Extra Notes (optional)</label><input class="field-input" type="text" id="iNotes" placeholder="e.g. I already have 4 batteries..."/></div>
+      <button class="btn-go" style="background:linear-gradient(135deg,var(--arc),#0099cc)" onclick="sendInvWA()">🔌 Send Inverter Quote to WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- BATTERY TAB -->
+  <div class="tab-panel" id="tab-battery">
+    <div style="background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:2rem">
+      <div style="font-family:var(--font-display);font-size:0.9rem;font-weight:700;color:var(--green);margin-bottom:1.2rem">🔋 Battery Quote Details</div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Battery Type</label><select class="field-select" id="bType"><option>AGM Deep-Cycle — Standard</option><option>Gel Battery</option><option>Lithium LiFePO4 — Premium</option><option>Not sure — recommend</option></select></div>
+        <div class="field-group"><label class="field-label">Capacity</label><select class="field-select" id="bCap"><option>100Ah</option><option>150Ah</option><option>200Ah</option><option>Not sure</option></select></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Quantity Needed</label><select class="field-select" id="bQty"><option>1</option><option>2</option><option>3</option><option>4</option><option>6</option><option>8</option><option>Not sure — advise</option></select></div>
+        <div class="field-group"><label class="field-label">System Voltage</label><select class="field-select" id="bVolt"><option>12V</option><option>24V</option><option>48V</option><option>I don't know</option></select></div>
+      </div>
+      <div class="field-group"><label class="field-label">Purpose</label><select class="field-select" id="bPurp"><option>Replacing old batteries</option><option>Adding to existing system</option><option>New system — batteries only</option></select></div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Your Name</label><input class="field-input" type="text" id="bName" placeholder="e.g. Ngozi"/></div>
+        <div class="field-group"><label class="field-label">Phone *</label><input class="field-input" type="tel" id="bPhone" placeholder="08012345678"/></div>
+      </div>
+      <div class="field-group"><label class="field-label">Location</label><input class="field-input" type="text" id="bCity" placeholder="e.g. Owerri, Imo"/></div>
+      <button class="btn-go" style="background:linear-gradient(135deg,var(--green),#009955)" onclick="sendBattWA()">🔋 Send Battery Quote to WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- CAMERA TAB -->
+  <div class="tab-panel" id="tab-camera">
+    <div style="background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:2rem">
+      <div style="font-family:var(--font-display);font-size:0.9rem;font-weight:700;color:var(--solar-hot);margin-bottom:1.2rem">📷 CCTV Camera Quote Details</div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Installation Venue</label><select class="field-select" id="cVenue"><option>My house / home</option><option>My shop / store</option><option>Office / company</option><option>Warehouse / compound</option><option>Church / school</option></select></div>
+        <div class="field-group"><label class="field-label">Number of Cameras</label><select class="field-select" id="cQty"><option>1–2 cameras</option><option>3–4 cameras</option><option>5–8 cameras</option><option>9–16 cameras</option><option>16+ (large site)</option><option>Not sure</option></select></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Camera Type</label><select class="field-select" id="cType"><option>Outdoor only</option><option>Indoor only</option><option>Indoor & Outdoor mix</option></select></div>
+        <div class="field-group"><label class="field-label">Resolution</label><select class="field-select" id="cRes"><option>HD 2MP — standard</option><option>Full HD 4MP — clear</option><option>4K 8MP — best quality</option><option>Not sure — recommend</option></select></div>
+      </div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Features</label><select class="field-select" id="cFeat"><option>Night vision</option><option>Night vision + remote viewing</option><option>AI motion detection + alerts</option><option>All features</option></select></div>
+        <div class="field-group"><label class="field-label">Installation</label><select class="field-select" id="cInst"><option>Yes — full installation</option><option>No — supply only</option></select></div>
+      </div>
+      <div class="field-group"><label class="field-label">Extra Notes</label><input class="field-input" type="text" id="cNotes" placeholder="e.g. large compound, need long cable runs..."/></div>
+      <div class="field-row">
+        <div class="field-group"><label class="field-label">Your Name</label><input class="field-input" type="text" id="cName" placeholder="e.g. Sani"/></div>
+        <div class="field-group"><label class="field-label">Phone *</label><input class="field-input" type="tel" id="cPhone" placeholder="08012345678"/></div>
+      </div>
+      <div class="field-group"><label class="field-label">Location</label><input class="field-input" type="text" id="cCity" placeholder="e.g. Jos, Plateau"/></div>
+      <button class="btn-go" style="background:linear-gradient(135deg,var(--solar-hot),#cc5500)" onclick="sendCamWA()">📷 Send Camera Quote to WhatsApp</button>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-logo">Tuk<span>nova</span> Enterprise</div>
+  <div class="footer-links"><a href="index.html">Home</a><a href="products.html">Products</a><a href="solar.html">Solar</a><a href="inverter.html">Inverter</a><a href="battery.html">Battery</a><a href="camera.html">CCTV</a><a href="contact.html">Contact</a></div>
+  <p class="footer-copy">© 2025 Tuknova Enterprise · Lagos, Nigeria</p>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+// APPLIANCES
+const apps=[
+  {n:'LED Bulbs',i:'💡',w:10},{n:'Ceiling Fan',i:'🌀',w:75},{n:'Standing Fan',i:'💨',w:60},
+  {n:'32" TV',i:'📺',w:60},{n:'43" TV',i:'📺',w:100},{n:'Decoder/DSTV',i:'📡',w:25},
+  {n:'Phone Charger',i:'📱',w:10},{n:'Laptop',i:'💻',w:65},{n:'WiFi Router',i:'📶',w:15},
+  {n:'Fridge (Small)',i:'🧊',w:150},{n:'Fridge (Large)',i:'🧊',w:250},
+  {n:'AC 1HP',i:'❄️',w:750},{n:'AC 1.5HP',i:'❄️',w:1100},
+  {n:'Water Pump',i:'🚿',w:550},{n:'Electric Iron',i:'👔',w:1000},
+  {n:'Microwave',i:'🍲',w:1000},{n:'Washing Machine',i:'🫧',w:500},
+  {n:'Security Cam',i:'📷',w:15},{n:'Sound System',i:'🔊',w:200},{n:'Hair Dryer',i:'💇',w:1200},
+];
+apps.forEach((a,i)=>{a.qty=0;});
+const g=document.getElementById('appGrid');
+apps.forEach((a,i)=>{
+  const el=document.createElement('div');el.className='app-card';el.id=`ac${i}`;
+  el.innerHTML=`<div class="app-icon">${a.i}</div><div class="app-name">${a.n}</div><div class="app-watt">${a.w}W each</div><div class="app-ctrl"><button class="qb" onclick="cq(${i},-1)">−</button><span class="qv" id="q${i}">0</span><button class="qb" onclick="cq(${i},1)">+</button></div>`;
+  g.appendChild(el);
+});
+function cq(i,d){apps[i].qty=Math.max(0,apps[i].qty+d);document.getElementById(`q${i}`).textContent=apps[i].qty;document.getElementById(`ac${i}`).classList.toggle('active',apps[i].qty>0);updateLive();}
+function updateLive(){
+  const sel=apps.filter(a=>a.qty>0);
+  const tw=sel.reduce((s,a)=>s+a.w*a.qty,0);
+  const items=sel.reduce((s,a)=>s+a.qty,0);
+  const kva=Math.ceil((tw*1.25)/1000*10)/10;
+  const inv=kva<1?1:kva>10?10:Math.ceil(kva*2)/2;
+  const sunH=parseFloat(document.getElementById('uLoc').value)||5;
+  const hrs=parseInt(document.getElementById('uHours').value)||8;
+  const panels=tw>0?Math.ceil((tw*hrs*1.25/0.9)/(400*sunH)):0;
+  document.getElementById('lLoad').textContent=tw>0?tw+'W':'0W';
+  document.getElementById('lItems').textContent=items;
+  document.getElementById('lInv').textContent=tw>0?inv+'KVA':'—';
+  document.getElementById('lPanels').textContent=tw>0?panels+'pcs':'—';
+}
+document.getElementById('uHours').onchange=updateLive;
+document.getElementById('uLoc').onchange=updateLive;
+
+// TAB SWITCH
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');document.getElementById(`tab-${id}`).classList.add('active');
+}
+
+// SOLAR CALC
+function calcSolar(){
+  const phone=document.getElementById('uPhone').value.trim();
+  if(!phone){alert('Please enter your phone number.');return;}
+  const sel=apps.filter(a=>a.qty>0);
+  if(!sel.length){alert('Please add at least one appliance.');return;}
+  const tw=sel.reduce((s,a)=>s+a.w*a.qty,0);
+  const hrs=parseInt(document.getElementById('uHours').value);
+  const sunH=parseFloat(document.getElementById('uLoc').value)||5;
+  const battT=document.getElementById('uBatt').value;
+  const autoD=parseInt(document.getElementById('uDays').value);
+  const inst=document.getElementById('uInst').value;
+  const name=document.getElementById('uName').value.trim();
+  const city=document.getElementById('uCity').value.trim();
+  const dailyWh=tw*hrs;
+  const kva=Math.ceil((tw*1.25)/1000*10)/10;
+  const invKVA=kva<1?1:kva>10?10:Math.ceil(kva*2)/2;
+  const panels=Math.ceil((dailyWh*1.25/0.9)/(400*sunH));
+  const bVolt=invKVA>=3?48:24;
+  const batts=Math.ceil((dailyWh*autoD*1.25)/(bVolt*0.8*200));
+  const battLabel=battT==='lithium'?'Lithium LiFePO4':'AGM Deep-Cycle';
+  const locLabel=document.getElementById('uLoc').options[document.getElementById('uLoc').selectedIndex].text;
+  const hrLabel=document.getElementById('uHours').options[document.getElementById('uHours').selectedIndex].text;
+  const adLabel=document.getElementById('uDays').options[document.getElementById('uDays').selectedIndex].text;
+  document.getElementById('sResCards').innerHTML=`
+    <div class="res-card"><span class="rc-icon">☀️</span><div class="rc-val">${panels}</div><div class="rc-unit">× 400W Panels</div><div class="rc-label">Solar Panels</div></div>
+    <div class="res-card"><span class="rc-icon">🔌</span><div class="rc-val">${invKVA}KVA</div><div class="rc-unit">Pure Sine/Hybrid</div><div class="rc-label">Inverter</div></div>
+    <div class="res-card"><span class="rc-icon">🔋</span><div class="rc-val">${batts}</div><div class="rc-unit">× 200Ah ${battT==='lithium'?'Li':'AGM'}</div><div class="rc-label">Batteries</div></div>
+    <div class="res-card"><span class="rc-icon">⚡</span><div class="rc-val">${tw}W</div><div class="rc-unit">Total Load</div><div class="rc-label">System Load</div></div>`;
+  const appLines=sel.map(a=>`   • ${a.qty}× ${a.n} (${a.w}W × ${a.qty} = ${a.w*a.qty}W)`).join('\n');
+  const instLabel=inst==='yes'?'Yes — install for me':inst==='no'?'No — supply only':'Not sure yet';
+  const msg=`🌞 *FULL SOLAR SYSTEM QUOTE — TUKNOVA WEBSITE*\n━━━━━━━━━━━━━━━━━━━━━━\n👤 *Customer*\nName: ${name||'Not provided'}\nPhone: ${phone}\nLocation: ${city||'Not provided'}\n\n━━━━━━━━━━━━━━━━━━━━━━\n🏠 *Appliances*\n${appLines}\n⚡ *Total Load: ${tw}W*\n\n━━━━━━━━━━━━━━━━━━━━━━\n📋 *Calculated System*\n☀️ Panels: ${panels} × 400W\n🔌 Inverter: ${invKVA}KVA\n🔋 Batteries: ${batts} × 200Ah ${battLabel}\n🕐 Backup: ${hrLabel}\n📅 Autonomy: ${adLabel}\n📍 Zone: ${locLabel}\n🔧 Installation: ${instLabel}\n\nPlease send me the *official Naira price quote*. Thank you! 🙏`;
+  document.getElementById('sWaBtn').href=`https://wa.me/2349064859498?text=${encodeURIComponent(msg)}`;
+  document.getElementById('solarResult').style.display='block';
+  document.getElementById('solarResult').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function resetSolar(){apps.forEach((a,i)=>{a.qty=0;document.getElementById(`q${i}`).textContent='0';document.getElementById(`ac${i}`).classList.remove('active');});document.getElementById('solarResult').style.display='none';updateLive();window.scrollTo({top:0,behavior:'smooth'});}
+
+// INVERTER WA
+function sendInvWA(){
+  const phone=document.getElementById('iPhone').value.trim();
+  if(!phone){alert('Phone number required.');return;}
+  const msg=`🔌 *INVERTER QUOTE — TUKNOVA WEBSITE*\n━━━━━━━━━━━━━━━━━━━━━━\n👤 Name: ${document.getElementById('iName').value||'Not provided'}\nPhone: ${phone}\nLocation: ${document.getElementById('iCity').value||'Not provided'}\n\n🔌 *Details*\nSize: ${document.getElementById('iSize').value}\nType: ${document.getElementById('iType').value}\nLoad: ${document.getElementById('iLoad').value}\nInstallation: ${document.getElementById('iInst').value}\nBrand: ${document.getElementById('iBrand').value||'No preference'}\nNotes: ${document.getElementById('iNotes').value||'None'}\n\nPlease send *Naira price quote*. Thank you! 🙏`;
+  window.open(`https://wa.me/2349064859498?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// BATTERY WA
+function sendBattWA(){
+  const phone=document.getElementById('bPhone').value.trim();
+  if(!phone){alert('Phone number required.');return;}
+  const msg=`🔋 *BATTERY QUOTE — TUKNOVA WEBSITE*\n━━━━━━━━━━━━━━━━━━━━━━\n👤 Name: ${document.getElementById('bName').value||'Not provided'}\nPhone: ${phone}\nLocation: ${document.getElementById('bCity').value||'Not provided'}\n\n🔋 *Details*\nType: ${document.getElementById('bType').value}\nCapacity: ${document.getElementById('bCap').value}\nQuantity: ${document.getElementById('bQty').value}\nSystem Voltage: ${document.getElementById('bVolt').value}\nPurpose: ${document.getElementById('bPurp').value}\n\nPlease send *Naira price quote*. Thank you! 🙏`;
+  window.open(`https://wa.me/2349064859498?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+// CAMERA WA
+function sendCamWA(){
+  const phone=document.getElementById('cPhone').value.trim();
+  if(!phone){alert('Phone number required.');return;}
+  const msg=`📷 *CCTV CAMERA QUOTE — TUKNOVA WEBSITE*\n━━━━━━━━━━━━━━━━━━━━━━\n👤 Name: ${document.getElementById('cName').value||'Not provided'}\nPhone: ${phone}\nLocation: ${document.getElementById('cCity').value||'Not provided'}\n\n📷 *Details*\nVenue: ${document.getElementById('cVenue').value}\nCameras: ${document.getElementById('cQty').value}\nType: ${document.getElementById('cType').value}\nResolution: ${document.getElementById('cRes').value}\nFeatures: ${document.getElementById('cFeat').value}\nInstallation: ${document.getElementById('cInst').value}\nNotes: ${document.getElementById('cNotes').value||'None'}\n\nPlease send *Naira price quote*. Thank you! 🙏`;
+  window.open(`https://wa.me/2349064859498?text=${encodeURIComponent(msg)}`,'_blank');
+}
+</script>
+</body>
+</html>

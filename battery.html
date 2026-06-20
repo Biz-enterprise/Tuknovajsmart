@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Battery Quote — Tuknova Enterprise Nigeria</title>
+<meta name="description" content="Get a price quote for AGM, Gel or Lithium batteries in Nigeria. Fast WhatsApp quote from Tuknova Enterprise."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.page-hero{min-height:60vh;display:flex;align-items:center;padding:130px 5% 70px;position:relative;overflow:hidden;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(0,201,122,0.12) 0%,transparent 70%)}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,201,122,.1);border:1px solid rgba(0,201,122,.3);color:var(--green);font-size:.72rem;font-weight:700;padding:.4rem 1rem;border-radius:2rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.2rem;animation:fadeUp .6s ease both}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.6rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;animation:fadeUp .7s .1s ease both}
+.accent-green{color:var(--green)}
+.hero-sub{color:var(--muted);font-size:1rem;margin:1rem 0 1.5rem;max-width:460px;animation:fadeUp .8s .2s ease both}
+.feats{display:flex;gap:1.4rem;flex-wrap:wrap;animation:fadeUp .9s .3s ease both}
+.feat{display:flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--muted)}
+.feat span{color:var(--green)}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(0,201,122,.1);animation:pulse-ring 4s ease-in-out infinite}
+/* TYPE PICKER */
+.type-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem}
+.type-card{background:var(--panel);border:2px solid var(--border);border-radius:16px;padding:1.8rem 1.2rem;cursor:pointer;text-align:center;transition:all .3s;color:var(--white)}
+.type-card:hover{border-color:rgba(0,201,122,.4);transform:translateY(-3px)}
+.type-card.active{border-color:var(--green);background:rgba(0,201,122,.07);box-shadow:0 0 24px rgba(0,201,122,.15)}
+.type-icon{font-size:2.5rem;display:block;margin-bottom:.6rem}
+.type-name{font-family:var(--font-display);font-size:1rem;font-weight:800;color:var(--green);margin-bottom:.3rem}
+.type-desc{font-size:.75rem;color:var(--muted);line-height:1.5}
+.type-badge{display:inline-block;margin-top:.6rem;background:rgba(0,201,122,.1);border:1px solid rgba(0,201,122,.25);color:var(--green);font-size:.65rem;font-weight:700;padding:.2rem .6rem;border-radius:1rem}
+/* FORM */
+main{max-width:780px;margin:0 auto;padding:3rem 5% 6rem}
+.form-section{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:2.5rem;margin-bottom:2rem}
+.form-section h2{font-family:var(--font-display);font-size:1.15rem;font-weight:800;margin-bottom:.4rem}
+.form-section p{color:var(--muted);font-size:.88rem;margin-bottom:2rem}
+.slabel{font-family:var(--font-display);font-size:.85rem;font-weight:700;color:var(--green);margin:1.5rem 0 .8rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);display:block}
+.btn-submit-green{width:100%;background:linear-gradient(135deg,var(--green),#00a860);color:var(--void);border:none;padding:1rem;border-radius:10px;font-weight:800;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:.5rem}
+.btn-submit-green:hover{transform:scale(1.02);box-shadow:0 0 30px rgba(0,201,122,.4)}
+.wa-success{display:none;background:linear-gradient(135deg,rgba(37,211,102,.12),rgba(37,211,102,.04));border:1px solid rgba(37,211,102,.3);border-radius:16px;padding:2.5rem;text-align:center;margin-bottom:2rem}
+.wa-success h3{font-family:var(--font-display);font-size:1.2rem;font-weight:800;margin-bottom:.5rem}
+.wa-success p{color:var(--muted);font-size:.88rem;margin-bottom:1.5rem}
+/* COMPARE TABLE */
+.compare-table{width:100%;border-collapse:collapse;margin-top:1rem}
+.compare-table th{background:var(--deep);color:var(--muted);font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.7rem 1rem;text-align:left;border:1px solid var(--border)}
+.compare-table td{padding:.7rem 1rem;font-size:.85rem;border:1px solid var(--border);color:var(--white)}
+.compare-table tr:hover td{background:rgba(255,255,255,.02)}
+.check{color:var(--green)}.cross{color:#ff4757}
+/* LINKS */
+.other-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:1rem}
+.other-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;text-decoration:none;color:var(--white);transition:all .25s;display:block}
+.other-card:hover{border-color:rgba(245,166,35,.4);transform:translateY(-2px)}
+.btn-reset-sm{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.6rem 1.4rem;border-radius:2rem;font-size:.82rem;cursor:pointer;transition:all .2s}
+.btn-reset-sm:hover{border-color:var(--green);color:var(--green)}
+</style>
+</head>
+<body>
+
+<nav class="t-nav" id="navbar">
+  <a class="t-logo" href="index.html">Tuk<span>nova</span></a>
+  <ul class="t-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="solar.html">Solar</a></li>
+    <li><a href="inverter.html">Inverter</a></li>
+    <li><a href="battery.html" class="active">Battery</a></li>
+    <li><a href="camera.html">CCTV</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a class="t-cta" href="solar.html">Get Quote</a>
+  <button class="t-hamburger" onclick="openMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="t-mobile" id="tMobile">
+  <button class="t-close" onclick="closeMenu()">✕</button>
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="solar.html" onclick="closeMenu()">☀️ Solar</a>
+  <a href="inverter.html" onclick="closeMenu()">🔌 Inverter</a>
+  <a href="battery.html" onclick="closeMenu()">🔋 Battery</a>
+  <a href="camera.html" onclick="closeMenu()">📷 CCTV</a>
+  <a href="products.html" onclick="closeMenu()">🛒 Products</a>
+  <a href="contact.html" onclick="closeMenu()">📞 Contact</a>
+</div>
+
+
+<section class="page-hero">
+  <div class="ring" style="width:350px;height:350px;top:-5%;right:-3%"></div>
+  <div class="ring" style="width:520px;height:520px;top:-12%;right:-9%;animation-delay:1.5s"></div>
+  <div>
+    <div class="hero-badge">🔋 Battery Quote — All Types in Stock</div>
+    <h1 class="hero-title">Power That<br/><span class="accent-green">Lasts All Night</span><br/>& Beyond</h1>
+    <p class="hero-sub">AGM, Gel, Lithium LiFePO4 — 100Ah to 200Ah+. We stock every type. Get your price on WhatsApp in minutes.</p>
+    <div class="feats">
+      <div class="feat"><span>✓</span> AGM, Gel & Lithium in stock</div>
+      <div class="feat"><span>✓</span> 12V, 24V & 48V systems</div>
+      <div class="feat"><span>✓</span> Nationwide delivery</div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-wrap"><div class="ticker-inner"><span>AGM Deep-Cycle</span><span>Lithium LiFePO4</span><span>Gel Battery</span><span>100Ah</span><span>150Ah</span><span>200Ah</span><span>12V System</span><span>24V System</span><span>48V System</span><span>Nationwide Delivery</span><span>AGM Deep-Cycle</span><span>Lithium LiFePO4</span><span>Gel Battery</span><span>100Ah</span><span>150Ah</span><span>200Ah</span><span>12V System</span><span>24V System</span><span>48V System</span><span>Nationwide Delivery</span></div></div>
+
+<main>
+  <!-- BATTERY COMPARE -->
+  <div class="reveal" style="margin-bottom:2.5rem">
+    <div class="eyebrow">Battery Guide</div>
+    <h2 class="section-title" style="font-size:1.4rem">Which Battery Type is Right for You?</h2>
+    <div style="overflow-x:auto;margin-top:1rem">
+      <table class="compare-table">
+        <tr><th>Feature</th><th>AGM Deep-Cycle</th><th>Gel Battery</th><th>Lithium LiFePO4</th></tr>
+        <tr><td>Lifespan</td><td>3–5 years</td><td>4–6 years</td><td>8–15 years</td></tr>
+        <tr><td>Price</td><td>Most affordable</td><td>Mid-range</td><td>Premium</td></tr>
+        <tr><td>Maintenance</td><td><span class="check">✓</span> None</td><td><span class="check">✓</span> None</td><td><span class="check">✓</span> None</td></tr>
+        <tr><td>Charge Speed</td><td>Standard</td><td>Standard</td><td><span class="check">✓</span> Fast</td></tr>
+        <tr><td>Best For</td><td>Budget solar setup</td><td>Mid-range systems</td><td>Long-term investment</td></tr>
+        <tr><td>Weight</td><td>Heavy</td><td>Heavy</td><td><span class="check">✓</span> Light</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-section reveal" id="battFormCard">
+    <h2>🔋 Battery Quote Request</h2>
+    <p>Select your battery type, tell us what you need, and your quote goes straight to our WhatsApp.</p>
+
+    <span class="slabel">Step 1 — Choose Battery Type</span>
+    <div class="type-grid">
+      <div class="type-card active" onclick="selType(this,'AGM Deep-Cycle (Standard, affordable)')" id="bt-agm">
+        <span class="type-icon">🔵</span>
+        <div class="type-name">AGM</div>
+        <div class="type-desc">Standard deep-cycle battery. Most affordable option. Reliable for everyday solar systems.</div>
+        <span class="type-badge">Most Popular</span>
+      </div>
+      <div class="type-card" onclick="selType(this,'Gel Battery')" id="bt-gel">
+        <span class="type-icon">🟢</span>
+        <div class="type-name">Gel</div>
+        <div class="type-desc">Mid-range option. Slightly longer lifespan than AGM, great for warmer climates like Nigeria.</div>
+        <span class="type-badge">Best Value</span>
+      </div>
+      <div class="type-card" onclick="selType(this,'Lithium LiFePO4 (Premium, long-life)')" id="bt-li">
+        <span class="type-icon">⚡</span>
+        <div class="type-name">Lithium</div>
+        <div class="type-desc">Premium LiFePO4. Lasts 10+ years, lighter, faster to charge. Best long-term investment.</div>
+        <span class="type-badge">Premium ✨</span>
+      </div>
+    </div>
+
+    <span class="slabel">Step 2 — Quantity & System Details</span>
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label">Battery Capacity</label>
+        <select class="field-select" id="bCap">
+          <option>100Ah</option><option selected>200Ah</option><option>150Ah</option>
+          <option>Not sure — recommend for me</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">How Many Batteries?</label>
+        <select class="field-select" id="bQty">
+          <option>1</option><option>2</option><option>3</option><option>4</option>
+          <option>6</option><option>8</option><option>Not sure — advise me</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label">System Voltage</label>
+        <select class="field-select" id="bVolt">
+          <option>12V system</option><option>24V system</option>
+          <option>48V system</option><option>I don't know</option>
+        </select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Purpose</label>
+        <select class="field-select" id="bPurp">
+          <option>Replacing old batteries</option>
+          <option>Adding more to existing system</option>
+          <option>New system — batteries only</option>
+        </select>
+      </div>
+    </div>
+
+    <span class="slabel">Step 3 — Your Details</span>
+    <div class="field-row">
+      <div class="field-group">
+        <label class="field-label">Full Name</label>
+        <input class="field-input" type="text" id="bName" placeholder="e.g. Ngozi Eze"/>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Phone Number *</label>
+        <input class="field-input" type="tel" id="bPhone" placeholder="e.g. 08012345678"/>
+      </div>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Your Location</label>
+      <input class="field-input" type="text" id="bCity" placeholder="e.g. Owerri, Imo State"/>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Extra Notes (optional)</label>
+      <input class="field-input" type="text" id="bNotes" placeholder="e.g. I have a 3KVA Luminous inverter already..."/>
+    </div>
+    <button class="btn-submit-green" onclick="submitBatt()">🔋 Send Battery Quote to WhatsApp</button>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="wa-success" id="battSuccess">
+    <div style="font-size:2.5rem;margin-bottom:.8rem">✅</div>
+    <h3>Quote Request Sent to WhatsApp!</h3>
+    <p>Your battery details have been packaged and sent. We reply with exact Naira pricing within minutes.</p>
+    <a class="btn-wa" id="battWaLink" href="#" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Re-open WhatsApp
+    </a>
+    <br/><button class="btn-reset-sm" onclick="resetBatt()" style="margin-top:1rem">Start New Quote</button>
+  </div>
+
+  <!-- ALSO NEED -->
+  <div style="padding-top:2rem;border-top:1px solid var(--border)">
+    <div style="font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--muted);margin-bottom:1rem">Also Available</div>
+    <div class="other-grid">
+      <a href="solar.html" class="other-card"><div style="font-size:1.8rem">🌞</div><div style="font-family:var(--font-display);font-size:.85rem;font-weight:700;margin-top:.3rem">Full Solar</div><div style="font-size:.7rem;color:var(--muted)">Complete system</div></a>
+      <a href="inverter.html" class="other-card"><div style="font-size:1.8rem">🔌</div><div style="font-family:var(--font-display);font-size:.85rem;font-weight:700;margin-top:.3rem">Inverter</div><div style="font-size:.7rem;color:var(--muted)">Any size</div></a>
+      <a href="camera.html" class="other-card"><div style="font-size:1.8rem">📷</div><div style="font-family:var(--font-display);font-size:.85rem;font-weight:700;margin-top:.3rem">CCTV Camera</div><div style="font-size:.7rem;color:var(--muted)">Security systems</div></a>
+    </div>
+  </div>
+</main>
+
+<footer class="t-footer">
+  <div class="t-footer-logo">Tuk<span>nova</span> Enterprise</div>
+  <p class="t-footer-tagline">Powering Homes & Securing Lives Across Nigeria</p>
+  <div class="t-footer-links">
+    <a href="index.html">Home</a><a href="solar.html">Solar</a><a href="inverter.html">Inverter</a>
+    <a href="battery.html">Battery</a><a href="camera.html">CCTV</a><a href="products.html">Products</a>
+    <a href="contact.html">Contact</a><a href="tel:+2349064859498">📞 09064859498</a>
+  </div>
+  <p class="t-footer-copy">© 2025 Tuknova Enterprise · Lagos, Nigeria · Serving All 36 States</p>
+</footer>
+
+<script>
+let selectedBattType = 'AGM Deep-Cycle (Standard, affordable)';
+function selType(card, type) {
+  document.querySelectorAll('.type-card').forEach(c => c.classList.remove('active'));
+  card.classList.add('active');
+  selectedBattType = type;
+}
+function submitBatt() {
+  const phone = document.getElementById('bPhone').value.trim();
+  if(!phone) { alert('Please enter your phone number.'); return; }
+  const name = document.getElementById('bName').value.trim();
+  const city = document.getElementById('bCity').value.trim();
+  const cap = document.getElementById('bCap').value;
+  const qty = document.getElementById('bQty').value;
+  const volt = document.getElementById('bVolt').value;
+  const purp = document.getElementById('bPurp').value;
+  const notes = document.getElementById('bNotes').value.trim();
+  const msg = `🔋 *BATTERY QUOTE REQUEST — TUKNOVA WEBSITE*
+━━━━━━━━━━━━━━━━━━━━━━
+👤 *Customer*
+Name: ${name||'Not provided'}
+Phone: ${phone}
+Location: ${city||'Not provided'}
+
+━━━━━━━━━━━━━━━━━━━━━━
+🔋 *Battery Details*
+Type: ${selectedBattType}
+Capacity: ${cap}
+Quantity: ${qty}
+System Voltage: ${volt}
+Purpose: ${purp}
+${notes?`Extra Notes: ${notes}`:''}
+
+━━━━━━━━━━━━━━━━━━━━━━
+Please send me the *Naira price quote* for these batteries. Thank you! 🙏`;
+  const url = `https://wa.me/2349064859498?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+  document.getElementById('battWaLink').href = url;
+  document.getElementById('battFormCard').style.display = 'none';
+  document.getElementById('battSuccess').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function resetBatt() {
+  document.getElementById('battFormCard').style.display = 'block';
+  document.getElementById('battSuccess').style.display = 'none';
+  document.getElementById('bPhone').value = '';
+  document.getElementById('bName').value = '';
+  document.getElementById('bCity').value = '';
+  document.getElementById('bNotes').value = '';
+}
+// ═══════════════════════════════════════
+// TUKNOVA SHARED JS — included in all pages
+// ═══════════════════════════════════════
+
+// Nav mobile
+function openMenu() { document.getElementById('tMobile').classList.add('open'); }
+function closeMenu() { document.getElementById('tMobile').classList.remove('open'); }
+
+// Set active nav link
+(function(){
+  const page = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.t-links a').forEach(a => {
+    if(a.getAttribute('href') === page) a.classList.add('active');
+  });
+})();
+
+</script>
+<script src="shared.js"></script>
+</body>
+</html>

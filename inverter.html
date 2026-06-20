@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Inverter Quote — Tuknova Enterprise</title>
+<meta name="description" content="Get a quote for any inverter size. Pure sine wave, hybrid, 1KVA to 10KVA. Sent straight to WhatsApp."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.size-picker{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.8rem;margin-bottom:2rem}
+.size-btn{background:var(--panel);border:2px solid var(--border);border-radius:12px;padding:1.1rem .5rem;cursor:pointer;text-align:center;transition:all .25s;color:var(--white)}
+.size-btn:hover{border-color:rgba(0,212,255,.4);transform:translateY(-2px)}
+.size-btn.sel{border-color:var(--arc);background:rgba(0,212,255,.08);box-shadow:0 0 20px rgba(0,212,255,.15)}
+.size-kva{font-family:var(--font-d);font-size:1.25rem;font-weight:800;color:var(--arc)}
+.size-desc{font-size:.64rem;color:var(--muted);margin-top:.2rem;line-height:1.3}
+.form-card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:2.2rem;margin-bottom:2rem}
+.section-label{font-family:var(--font-d);font-size:.88rem;font-weight:700;color:var(--arc);margin:1.4rem 0 .8rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.guide-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:1.5rem 0 2.5rem}
+.guide-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1.2rem}
+.guide-kva{font-family:var(--font-d);font-size:1.05rem;font-weight:800;color:var(--arc)}
+.wa-success{display:none;background:linear-gradient(135deg,rgba(37,211,102,.12),rgba(37,211,102,.04));border:1px solid rgba(37,211,102,.3);border-radius:16px;padding:2.3rem;text-align:center;margin-bottom:2rem}
+.other-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:1rem}
+.oc{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;text-decoration:none;color:var(--white);transition:all .25s;display:block}
+.oc:hover{border-color:rgba(245,166,35,.4);transform:translateY(-2px)}
+@media(max-width:700px){.f-row{grid-template-columns:1fr}}
+</style></head><body>
+<nav class="t-nav" id="tNav">
+  <a class="nav-logo" href="index.html">Tuk<span>nova</span></a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="products.html">Products</a></li><li><a href="calculator.html">Calculator</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <a class="nav-cta" href="index.html#get-quote">← All Quotes</a>
+  <button class="hamburger" onclick="openMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu"><button class="mob-close" onclick="closeMenu()">✕</button>
+  <a href="index.html">Home</a><a href="products.html">Products</a><a href="calculator.html">Calculator</a><a href="contact.html">Contact</a></div>
+
+<section class="page-hero" style="background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,212,255,.1) 0%,transparent 70%)">
+  <div class="page-badge" style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.25);color:var(--arc)">🔌 Inverter Quote — All Sizes in Stock</div>
+  <h1 class="page-title">Get the Right<br/><span style="color:var(--arc)">Inverter</span> for<br/>Your Home</h1>
+  <p class="page-sub">Pure sine wave, hybrid MPPT, 1KVA to 10KVA. Tell us what you need — we quote you instantly on WhatsApp.</p>
+  <div style="display:flex;gap:1.5rem;flex-wrap:wrap;animation:fadeUp .9s .3s ease both">
+    <span style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--muted)"><span style="color:var(--arc)">✓</span> Pure Sine & Hybrid</span>
+    <span style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--muted)"><span style="color:var(--arc)">✓</span> All major brands</span>
+    <span style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--muted)"><span style="color:var(--arc)">✓</span> Installation available</span>
+  </div>
+</section>
+
+<main style="max-width:780px;margin:0 auto;padding:1rem 5% 6rem">
+  <div style="font-family:var(--font-d);font-size:1rem;font-weight:700;color:var(--arc);margin-bottom:1rem">📖 Which inverter size do you need?</div>
+  <div class="guide-grid">
+    <div class="guide-card"><div class="guide-kva">1KVA</div><div style="font-size:.85rem;font-weight:700;margin:.3rem 0">Basic Home</div><div style="font-size:.78rem;color:var(--muted);line-height:1.6">Lights, fans, TV, decoder, chargers</div></div>
+    <div class="guide-card"><div class="guide-kva">2KVA</div><div style="font-size:.85rem;font-weight:700;margin:.3rem 0">Medium Home</div><div style="font-size:.78rem;color:var(--muted);line-height:1.6">Above + small fridge + laptop</div></div>
+    <div class="guide-card"><div class="guide-kva">3–5KVA</div><div style="font-size:.85rem;font-weight:700;margin:.3rem 0">Full Home</div><div style="font-size:.78rem;color:var(--muted);line-height:1.6">Fridge + AC 1HP + washing machine</div></div>
+    <div class="guide-card"><div class="guide-kva">7–10KVA</div><div style="font-size:.85rem;font-weight:700;margin:.3rem 0">Office / Shop</div><div style="font-size:.78rem;color:var(--muted);line-height:1.6">Multiple ACs, commercial loads</div></div>
+  </div>
+
+  <div class="form-card" id="formCard">
+    <h2 style="font-family:var(--font-d);font-size:1.2rem;font-weight:800;margin-bottom:.4rem">🔌 Inverter Quote Request</h2>
+    <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.5rem">Fill in the details — your full quote opens on WhatsApp instantly.</p>
+
+    <div class="section-label">Select Inverter Size</div>
+    <div class="size-picker">
+      <button class="size-btn" onclick="selSize(this,'1KVA')"><div class="size-kva">1KVA</div><div class="size-desc">Basic home</div></button>
+      <button class="size-btn" onclick="selSize(this,'2KVA')"><div class="size-kva">2KVA</div><div class="size-desc">Medium home</div></button>
+      <button class="size-btn" onclick="selSize(this,'3KVA')"><div class="size-kva">3KVA</div><div class="size-desc">Full home</div></button>
+      <button class="size-btn" onclick="selSize(this,'5KVA')"><div class="size-kva">5KVA</div><div class="size-desc">Large home</div></button>
+      <button class="size-btn" onclick="selSize(this,'7.5KVA')"><div class="size-kva">7.5KVA</div><div class="size-desc">Office/shop</div></button>
+      <button class="size-btn" onclick="selSize(this,'10KVA')"><div class="size-kva">10KVA</div><div class="size-desc">Commercial</div></button>
+      <button class="size-btn" onclick="selSize(this,'Not sure')"><div class="size-kva" style="font-size:1rem">?</div><div class="size-desc">Not sure — advise me</div></button>
+    </div>
+
+    <div class="f-row">
+      <div class="f-group"><label class="f-label">Inverter Type</label><select class="f-select" id="invType"><option>Pure Sine Wave (best quality)</option><option>Hybrid (with solar MPPT built-in)</option><option>Not sure — recommend best</option></select></div>
+      <div class="f-group"><label class="f-label">What do you want to power?</label><select class="f-select" id="invLoad"><option>Basic home (lights, fans, TV)</option><option>Medium home (+ fridge, laptop)</option><option>Full home (+ AC, washing machine)</option><option>Office or shop</option><option>Not sure — I need advice</option></select></div>
+    </div>
+    <div class="f-row">
+      <div class="f-group"><label class="f-label">Brand Preference</label><input class="f-input" type="text" id="invBrand" placeholder="Felicity, Growatt, Luminous... or blank"/></div>
+      <div class="f-group"><label class="f-label">Installation Needed?</label><select class="f-select" id="invInstall"><option>Yes — install for me</option><option>No — buying only</option></select></div>
+    </div>
+
+    <div class="section-label">Your Contact Details</div>
+    <div class="f-row">
+      <div class="f-group"><label class="f-label">Full Name</label><input class="f-input" type="text" id="invName" placeholder="e.g. Tunde Bakare"/></div>
+      <div class="f-group"><label class="f-label">Phone Number *</label><input class="f-input" type="tel" id="invPhone" placeholder="e.g. 08012345678"/></div>
+    </div>
+    <div class="f-group"><label class="f-label">Your Location</label><input class="f-input" type="text" id="invCity" placeholder="e.g. Surulere, Lagos"/></div>
+    <div class="f-group"><label class="f-label">Extra info? (optional)</label><input class="f-input" type="text" id="invNotes" placeholder="e.g. I already have 4 batteries, need compatible inverter..."/></div>
+
+    <button class="f-submit" onclick="submitInv()">🔌 Send Quote to WhatsApp & Get Price</button>
+  </div>
+
+  <div class="wa-success" id="waSuccess">
+    <div style="font-size:2.3rem;margin-bottom:.7rem">✅</div>
+    <h3 style="font-family:var(--font-d);font-size:1.15rem;font-weight:800;margin-bottom:.5rem">Quote Sent to WhatsApp!</h3>
+    <p style="color:var(--muted);font-size:.87rem;margin-bottom:1.3rem">Your inverter details are with our team. We'll reply with the exact Naira price and availability within minutes.</p>
+    <a class="btn-wa" id="waLink2" href="#" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Re-open WhatsApp</a><br/>
+    <button onclick="resetInv()" style="margin-top:1rem;background:transparent;border:1px solid var(--border);color:var(--muted);padding:.6rem 1.4rem;border-radius:2rem;font-size:.84rem;cursor:pointer">Start New Quote</button>
+  </div>
+
+  <div style="padding-top:2rem;border-top:1px solid var(--border)">
+    <p style="font-family:var(--font-d);font-size:.9rem;font-weight:700;color:var(--muted);margin-bottom:1rem">Also Available from Tuknova</p>
+    <div class="other-grid">
+      <a href="solar.html" class="oc"><span style="font-size:1.8rem;display:block;margin-bottom:.4rem">🌞</span><div style="font-family:var(--font-d);font-size:.85rem;font-weight:700">Full Solar</div><div style="font-size:.7rem;color:var(--muted)">Complete system</div></a>
+      <a href="battery.html" class="oc"><span style="font-size:1.8rem;display:block;margin-bottom:.4rem">🔋</span><div style="font-family:var(--font-d);font-size:.85rem;font-weight:700">Batteries</div><div style="font-size:.7rem;color:var(--muted)">AGM, Gel, Lithium</div></a>
+      <a href="camera.html" class="oc"><span style="font-size:1.8rem;display:block;margin-bottom:.4rem">📷</span><div style="font-family:var(--font-d);font-size:.85rem;font-weight:700">CCTV Cameras</div><div style="font-size:.7rem;color:var(--muted)">Security systems</div></a>
+    </div>
+  </div>
+</main>
+<footer class="t-footer"><div class="f-logo">Tuk<span>nova</span> Enterprise</div><div class="f-links"><a href="index.html">Home</a><a href="solar.html">Solar</a><a href="inverter.html">Inverter</a><a href="battery.html">Battery</a><a href="camera.html">CCTV</a><a href="calculator.html">Calculator</a><a href="contact.html">Contact</a><a href="tel:+2349064859498">📞 09064859498</a></div><p class="f-copy">© 2025 Tuknova Enterprise · Lagos, Nigeria</p></footer>
+<script src="shared.js"></script>
+<script>
+let selSz='Not sure';
+function selSize(btn,size){document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('sel'));btn.classList.add('sel');selSz=size;}
+function submitInv(){
+  const phone=document.getElementById('invPhone').value.trim();
+  if(!phone){alert('Please enter your phone number.');return;}
+  const name=document.getElementById('invName').value.trim();
+  const city=document.getElementById('invCity').value.trim();
+  const type=document.getElementById('invType').value;
+  const load=document.getElementById('invLoad').value;
+  const brand=document.getElementById('invBrand').value.trim();
+  const inst=document.getElementById('invInstall').value;
+  const notes=document.getElementById('invNotes').value.trim();
+  const msg=`🔌 *INVERTER QUOTE REQUEST — TUKNOVA WEBSITE*\n━━━━━━━━━━━━━━━━━━━━━━\n👤 *Customer*\nName: ${name||'Not provided'}\nPhone: ${phone}\nLocation: ${city||'Not provided'}\n\n━━━━━━━━━━━━━━━━━━━━━━\n🔌 *Inverter Details*\nSize Selected: *${selSz}*\nType: ${type}\nLoad/Usage: ${load}\nBrand Preference: ${brand||'No preference — recommend best'}\nInstallation: ${inst}\n${notes?`Extra Notes: ${notes}`:''}\n\n━━━━━━━━━━━━━━━━━━━━━━\nPlease send me the *Naira price quote* for this inverter. Thank you! 🙏`;
+  const url=`https://wa.me/2349064859498?text=${encodeURIComponent(msg)}`;
+  window.open(url,'_blank');
+  document.getElementById('waLink2').href=url;
+  document.getElementById('formCard').style.display='none';
+  document.getElementById('waSuccess').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function resetInv(){
+  document.getElementById('formCard').style.display='block';
+  document.getElementById('waSuccess').style.display='none';
+  ['invPhone','invName','invCity','invBrand','invNotes'].forEach(id=>document.getElementById(id).value='');
+  document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('sel'));
+  selSz='Not sure';window.scrollTo({top:0,behavior:'smooth'});
+}
+</script></body></html>

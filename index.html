@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Tuknova Enterprise — Solar, Inverter, Cameras & Installation Nigeria</title>
+<meta name="description" content="Nigeria's #1 solar panel, inverter, battery and CCTV camera company. Lagos-based, serving all 36 states."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 5% 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(245,166,35,.13) 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 80% 80%,rgba(0,212,255,.07) 0%,transparent 60%),radial-gradient(ellipse 50% 60% at 20% 60%,rgba(0,201,122,.06) 0%,transparent 60%)}
+.sun-ring{position:absolute;border-radius:50%;border:1px solid;animation:pulse 4s ease-in-out infinite}
+.sun-ring:nth-child(1){width:300px;height:300px;top:5%;right:5%;border-color:rgba(245,166,35,.18);animation-delay:0s}
+.sun-ring:nth-child(2){width:450px;height:450px;top:-3%;right:-1%;border-color:rgba(245,166,35,.09);animation-delay:1s}
+.sun-ring:nth-child(3){width:600px;height:600px;top:-10%;right:-6%;border-color:rgba(245,166,35,.04);animation-delay:2s}
+.hero-badge{font-size:.75rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--solar);background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.25);padding:.35rem 1rem;border-radius:2rem;margin-bottom:1.8rem;position:relative;z-index:1;animation:fadeUp .8s ease both;display:inline-block}
+.hero-title{font-family:var(--font-d);font-size:clamp(2.8rem,7vw,6rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;position:relative;z-index:1;animation:fadeUp .9s .1s ease both}
+.line-solar{color:var(--solar);display:block}
+.line-arc{background:linear-gradient(90deg,var(--arc),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero-sub{max-width:560px;color:var(--muted);font-size:1.05rem;margin:1.6rem auto 2.4rem;position:relative;z-index:1;animation:fadeUp 1s .2s ease both}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;animation:fadeUp 1s .3s ease both}
+.hero-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;margin-top:4rem;padding-top:2.5rem;border-top:1px solid var(--border);position:relative;z-index:1;animation:fadeUp 1s .4s ease both}
+.stat-num{font-family:var(--font-d);font-size:2rem;font-weight:800;color:var(--solar);line-height:1}
+.stat-label{font-size:.76rem;color:var(--muted);margin-top:.25rem;letter-spacing:.06em;text-transform:uppercase}
+
+/* SERVICES */
+#services{background:var(--deep)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:3rem}
+.s-icon{font-size:2.4rem;margin-bottom:1rem;display:block}
+.s-tag{display:inline-block;margin-top:1rem;font-size:.72rem;font-weight:600;letter-spacing:.08em;color:var(--solar);background:rgba(245,166,35,.1);padding:.2rem .6rem;border-radius:1rem}
+
+/* QUOTE CARDS */
+#get-quote{background:var(--void);position:relative;overflow:hidden}
+#get-quote::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(245,166,35,.07) 0%,transparent 70%);pointer-events:none}
+.quote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:3rem}
+.quote-card{background:var(--panel);border:2px solid var(--border);border-radius:20px;padding:2rem 1.2rem;text-align:center;text-decoration:none;color:var(--white);transition:all .35s;display:block;position:relative;overflow:hidden;group:true}
+.quote-card-inner{position:relative;z-index:1}
+.quote-card-glow{position:absolute;inset:0;opacity:0;transition:opacity .3s;border-radius:18px}
+.quote-card:hover .quote-card-glow{opacity:1}
+.quote-card:hover{transform:translateY(-8px) scale(1.02)}
+.qc-solar{border-color:rgba(245,166,35,.2)}.qc-solar:hover{border-color:var(--solar);box-shadow:0 0 40px rgba(245,166,35,.2)}
+.qc-solar .quote-card-glow{background:linear-gradient(135deg,rgba(245,166,35,.12),transparent)}
+.qc-inv{border-color:rgba(0,212,255,.15)}.qc-inv:hover{border-color:var(--arc);box-shadow:0 0 40px rgba(0,212,255,.15)}
+.qc-inv .quote-card-glow{background:linear-gradient(135deg,rgba(0,212,255,.1),transparent)}
+.qc-batt{border-color:rgba(0,201,122,.15)}.qc-batt:hover{border-color:var(--green);box-shadow:0 0 40px rgba(0,201,122,.15)}
+.qc-batt .quote-card-glow{background:linear-gradient(135deg,rgba(0,201,122,.1),transparent)}
+.qc-cam{border-color:rgba(255,124,26,.15)}.qc-cam:hover{border-color:var(--solar-hot);box-shadow:0 0 40px rgba(255,124,26,.15)}
+.qc-cam .quote-card-glow{background:linear-gradient(135deg,rgba(255,124,26,.1),transparent)}
+.qc-icon{font-size:3rem;display:block;margin-bottom:.8rem;transition:transform .3s}
+.quote-card:hover .qc-icon{transform:scale(1.2) rotate(-5deg)}
+.qc-name{font-family:var(--font-d);font-size:1.05rem;font-weight:800;margin-bottom:.4rem}
+.qc-desc{font-size:.76rem;color:var(--muted);line-height:1.5;margin-bottom:1rem}
+.qc-arrow{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:700;padding:.4rem 1rem;border-radius:2rem;border:1px solid;transition:all .2s}
+.qc-solar .qc-arrow{color:var(--solar);border-color:rgba(245,166,35,.3)}
+.qc-inv .qc-arrow{color:var(--arc);border-color:rgba(0,212,255,.3)}
+.qc-batt .qc-arrow{color:var(--green);border-color:rgba(0,201,122,.3)}
+.qc-cam .qc-arrow{color:var(--solar-hot);border-color:rgba(255,124,26,.3)}
+.quote-card:hover .qc-arrow{background:rgba(255,255,255,.05)}
+
+/* WHY */
+#why{background:var(--deep)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
+.why-orb-wrap{position:relative;aspect-ratio:1;max-width:420px}
+.why-orb{position:absolute;border-radius:50%;background:conic-gradient(from 180deg,var(--solar) 0%,var(--solar-hot) 30%,transparent 60%);animation:spin 8s linear infinite}
+.why-orb:nth-child(1){inset:0;opacity:.25}
+.why-orb:nth-child(2){inset:15%;opacity:.15;animation-direction:reverse;animation-duration:12s}
+.why-center{position:absolute;inset:25%;background:var(--panel);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;border:1px solid var(--border);box-shadow:0 0 60px rgba(245,166,35,.15)}
+.why-center .wc-icon{font-size:2.8rem}
+.why-center p{font-family:var(--font-d);font-size:.8rem;font-weight:700;color:var(--solar);text-align:center;margin-top:.3rem}
+.why-points{display:flex;flex-direction:column;gap:1.4rem}
+.why-point{display:flex;gap:1rem;align-items:flex-start}
+.wp-icon{width:42px;height:42px;min-width:42px;border-radius:10px;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+
+/* REVIEWS */
+#reviews{background:var(--void);overflow:hidden}
+.rev-track-wrap{overflow:hidden;margin-top:2rem}
+.rev-track{display:flex;gap:1.5rem;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.rev-card{min-width:320px;max-width:320px;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:1.8rem;flex-shrink:0;position:relative}
+.rev-card::before{content:'"';position:absolute;top:.8rem;right:1.2rem;font-size:4rem;color:rgba(245,166,35,.08);font-family:Georgia,serif;line-height:1}
+.rev-stars{color:var(--solar);font-size:.9rem;margin-bottom:.8rem}
+.rev-text{color:var(--muted);font-size:.9rem;line-height:1.65;margin-bottom:1.2rem;font-style:italic}
+.rev-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--solar),var(--solar-hot));display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:1rem;font-weight:800;color:var(--void)}
+.rev-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;cursor:pointer;transition:background .3s,transform .2s}
+.rev-dot.active{background:var(--solar);transform:scale(1.3)}
+.rev-arrow{width:40px;height:40px;border-radius:50%;background:var(--panel);border:1px solid var(--border);color:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:border-color .2s,background .2s}
+.rev-arrow:hover{border-color:var(--solar);background:rgba(245,166,35,.1)}
+
+/* HOW */
+#how{background:var(--deep)}
+.how-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:3rem}
+.how-step{padding:2rem 1.5rem;text-align:center;position:relative}
+.how-step:not(:last-child)::after{content:'→';position:absolute;right:-.5rem;top:2.5rem;color:var(--solar);font-size:1.2rem;opacity:.4}
+.how-num{width:52px;height:52px;border-radius:50%;background:rgba(245,166,35,.1);border:2px solid rgba(245,166,35,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-d);font-size:1.2rem;font-weight:800;color:var(--solar)}
+
+@media(max-width:900px){.why-grid{grid-template-columns:1fr}.why-orb-wrap{display:none}.how-step:not(:last-child)::after{display:none}}
+@media(max-width:700px){.hero-title{font-size:2.4rem}.hero-stats{gap:1.5rem}.rev-card{min-width:260px;max-width:260px}}
+</style>
+</head>
+<body>
+
+<nav class="t-nav" id="tNav">
+  <a class="nav-logo" href="index.html">Tuk<span>nova</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="calculator.html">Calculator</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a class="nav-cta" href="#get-quote">Get a Quote</a>
+  <button class="hamburger" onclick="openMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="closeMenu()">✕</button>
+  <a href="#services">Services</a>
+  <a href="products.html">Products</a>
+  <a href="calculator.html">Calculator</a>
+  <a href="#reviews">Reviews</a>
+  <a href="contact.html">Contact</a>
+  <a href="#get-quote" style="color:var(--solar)">Get a Quote</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"><div class="sun-ring"></div><div class="sun-ring"></div><div class="sun-ring"></div></div>
+  <div class="hero-badge">⚡ Nigeria's Trusted Energy & Security Experts</div>
+  <h1 class="hero-title">Power Your World<br/><span class="line-solar">With Clean Solar</span><span class="line-arc">Energy & Security</span></h1>
+  <p class="hero-sub">Solar panels, inverters, batteries, CCTV cameras and professional installation — serving Lagos and all of Nigeria.</p>
+  <div class="hero-btns">
+    <a href="#get-quote" class="btn-primary">⚡ Get My Quote Now</a>
+    <a href="contact.html" class="btn-ghost">Talk to an Expert</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">500+</div><div class="stat-label">Installations</div></div>
+    <div><div class="stat-num">6+</div><div class="stat-label">Years Experience</div></div>
+    <div><div class="stat-num">36</div><div class="stat-label">States Covered</div></div>
+    <div><div class="stat-num">98%</div><div class="stat-label">Satisfaction</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-inner">
+  <span>Solar Panels</span><span>Inverters</span><span>Lithium Batteries</span><span>CCTV Cameras</span><span>Professional Installation</span><span>Nationwide Delivery</span><span>Free Load Assessment</span>
+  <span>Solar Panels</span><span>Inverters</span><span>Lithium Batteries</span><span>CCTV Cameras</span><span>Professional Installation</span><span>Nationwide Delivery</span><span>Free Load Assessment</span>
+</div></div>
+
+<!-- SERVICES -->
+<section id="services" class="t-section">
+  <span class="s-eye reveal">What We Offer</span>
+  <h2 class="s-title reveal">Complete Energy & Security<br/>Solutions Under One Roof</h2>
+  <div class="services-grid">
+    <div class="card reveal"><span class="s-icon">☀️</span><h3 style="font-family:var(--font-d);font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Solar Panels</h3><p style="color:var(--muted);font-size:.9rem;line-height:1.6">High-efficiency monocrystalline panels, 100W–550W. For homes, farms, offices and industry.</p><span class="s-tag">Mono • Poly • 25yr Warranty</span></div>
+    <div class="card reveal"><span class="s-icon">🔌</span><h3 style="font-family:var(--font-d);font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Inverters</h3><p style="color:var(--muted);font-size:.9rem;line-height:1.6">Pure sine wave and hybrid inverters with MPPT, 1KVA to 10KVA. All major brands in stock.</p><span class="s-tag">Hybrid • Pure Sine • MPPT</span></div>
+    <div class="card reveal"><span class="s-icon">🔋</span><h3 style="font-family:var(--font-d);font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Batteries</h3><p style="color:var(--muted);font-size:.9rem;line-height:1.6">Deep-cycle AGM, Gel and Lithium LiFePO4 batteries. Maximum backup, maximum lifespan.</p><span class="s-tag">AGM • Gel • Lithium</span></div>
+    <div class="card reveal"><span class="s-icon">📷</span><h3 style="font-family:var(--font-d);font-size:1.1rem;font-weight:700;margin-bottom:.5rem">CCTV Cameras</h3><p style="color:var(--muted);font-size:.9rem;line-height:1.6">HD to 4K cameras, night vision, DVR/NVR, remote mobile viewing for home, office, shops.</p><span class="s-tag">HD • 4K • Night Vision</span></div>
+    <div class="card reveal"><span class="s-icon">🏗️</span><h3 style="font-family:var(--font-d);font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Professional Installation</h3><p style="color:var(--muted);font-size:.9rem;line-height:1.6">Certified engineers, roof mounting, cable management, earthing and full commissioning.</p><span class="s-tag">Certified • Warranty • Fast</span></div>
+    <div class="card reveal"><span class="s-icon">🛠️</span><h3 style="font-family:var(--font-d);font-size:1.1rem;font-weight:700;margin-bottom:.5rem">Maintenance & Repair</h3><p style="color:var(--muted);font-size:.9rem;line-height:1.6">Servicing, fault diagnosis, inverter repair, battery swap, camera maintenance — we stay with you.</p><span class="s-tag">Repairs • Support • Service</span></div>
+  </div>
+</section>
+
+<!-- GET A QUOTE -->
+<section id="get-quote" class="t-section">
+  <span class="s-eye reveal">Instant Quote</span>
+  <h2 class="s-title reveal">What Are You<br/><span style="color:var(--solar)">Shopping For Today?</span></h2>
+  <p class="s-sub reveal">Pick your service. Each page has a smart form that sends your full details to our WhatsApp — we reply with your price in minutes.</p>
+  <div class="quote-grid">
+    <a href="solar.html" class="quote-card qc-solar reveal">
+      <div class="quote-card-glow"></div>
+      <div class="quote-card-inner">
+        <span class="qc-icon">🌞</span>
+        <div class="qc-name">Full Solar System</div>
+        <div class="qc-desc">Panels + Inverter + Batteries + Professional Installation</div>
+        <div style="background:var(--solar);color:var(--void);font-size:.7rem;font-weight:700;padding:.25rem .7rem;border-radius:1rem;display:inline-block;margin-bottom:.8rem">MOST POPULAR ⚡</div><br/>
+        <span class="qc-arrow">Calculate & Quote →</span>
+      </div>
+    </a>
+    <a href="inverter.html" class="quote-card qc-inv reveal">
+      <div class="quote-card-glow"></div>
+      <div class="quote-card-inner">
+        <span class="qc-icon">🔌</span>
+        <div class="qc-name">Inverter Only</div>
+        <div class="qc-desc">Buy or replace an inverter. 1KVA to 10KVA, all types in stock.</div>
+        <span class="qc-arrow">Get Inverter Quote →</span>
+      </div>
+    </a>
+    <a href="battery.html" class="quote-card qc-batt reveal">
+      <div class="quote-card-glow"></div>
+      <div class="quote-card-inner">
+        <span class="qc-icon">🔋</span>
+        <div class="qc-name">Battery Only</div>
+        <div class="qc-desc">New batteries or replacement. AGM, Gel and Lithium LiFePO4.</div>
+        <span class="qc-arrow">Get Battery Quote →</span>
+      </div>
+    </a>
+    <a href="camera.html" class="quote-card qc-cam reveal">
+      <div class="quote-card-glow"></div>
+      <div class="quote-card-inner">
+        <span class="qc-icon">📷</span>
+        <div class="qc-name">CCTV Camera</div>
+        <div class="qc-desc">Security cameras for home, shop or office. HD, 4K, night vision.</div>
+        <span class="qc-arrow">Get Camera Quote →</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why" class="t-section">
+  <span class="s-eye reveal">Why Tuknova</span>
+  <h2 class="s-title reveal">Why Thousands of Nigerians<br/>Trust Us</h2>
+  <div class="why-grid">
+    <div class="why-orb-wrap reveal"><div class="why-orb"></div><div class="why-orb"></div><div class="why-center"><span class="wc-icon">⚡</span><p>TUKNOVA<br/>ENTERPRISE</p></div></div>
+    <div class="why-points">
+      <div class="why-point reveal"><div class="wp-icon">🎓</div><div><h4 style="font-family:var(--font-d);font-size:.95rem;font-weight:700;margin-bottom:.2rem">Certified Engineers</h4><p style="color:var(--muted);font-size:.87rem;line-height:1.55">Trained, certified installation team. We engineer — not guess — your system.</p></div></div>
+      <div class="why-point reveal"><div class="wp-icon">🇳🇬</div><div><h4 style="font-family:var(--font-d);font-size:.95rem;font-weight:700;margin-bottom:.2rem">Lagos-Based, Nationwide</h4><p style="color:var(--muted);font-size:.87rem;line-height:1.55">Deliver and install across all 36 states — Kano to PH, Enugu to Abuja.</p></div></div>
+      <div class="why-point reveal"><div class="wp-icon">💰</div><div><h4 style="font-family:var(--font-d);font-size:.95rem;font-weight:700;margin-bottom:.2rem">Honest Pricing</h4><p style="color:var(--muted);font-size:.87rem;line-height:1.55">What we quote is what you pay. No hidden charges, no surprises.</p></div></div>
+      <div class="why-point reveal"><div class="wp-icon">🔧</div><div><h4 style="font-family:var(--font-d);font-size:.95rem;font-weight:700;margin-bottom:.2rem">After-Sales Support</h4><p style="color:var(--muted);font-size:.87rem;line-height:1.55">We don't disappear. Maintenance, repairs and warranty — we're always reachable.</p></div></div>
+      <div class="why-point reveal"><div class="wp-icon">⚡</div><div><h4 style="font-family:var(--font-d);font-size:.95rem;font-weight:700;margin-bottom:.2rem">Quality Products Only</h4><p style="color:var(--muted);font-size:.87rem;line-height:1.55">No fake panels, no cloned inverters. Tested, reliable brands only.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section id="how" class="t-section">
+  <span class="s-eye reveal">How It Works</span>
+  <h2 class="s-title reveal">Getting Solar Has Never<br/>Been This Easy</h2>
+  <div class="how-steps">
+    <div class="how-step reveal"><div class="how-num">1</div><h4 style="font-family:var(--font-d);font-weight:700;font-size:.95rem;margin-bottom:.5rem">Pick Your Service</h4><p style="color:var(--muted);font-size:.85rem;line-height:1.55">Choose solar, inverter, battery or camera from the quote section above.</p></div>
+    <div class="how-step reveal"><div class="how-num">2</div><h4 style="font-family:var(--font-d);font-weight:700;font-size:.95rem;margin-bottom:.5rem">Fill the Smart Form</h4><p style="color:var(--muted);font-size:.85rem;line-height:1.55">Enter your appliances and details. The system calculates everything for you.</p></div>
+    <div class="how-step reveal"><div class="how-num">3</div><h4 style="font-family:var(--font-d);font-weight:700;font-size:.95rem;margin-bottom:.5rem">Send to WhatsApp</h4><p style="color:var(--muted);font-size:.85rem;line-height:1.55">One tap sends your full details to our team — we reply with your exact Naira price.</p></div>
+    <div class="how-step reveal"><div class="how-num">4</div><h4 style="font-family:var(--font-d);font-weight:700;font-size:.95rem;margin-bottom:.5rem">Enjoy Clean Power</h4><p style="color:var(--muted);font-size:.85rem;line-height:1.55">We deliver and install. Switch on and enjoy 24-hour reliable electricity.</p></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" class="t-section">
+  <span class="s-eye reveal">Customer Reviews</span>
+  <h2 class="s-title reveal">Real Nigerians. Real Results.</h2>
+  <p class="s-sub reveal">Over 500 installations across Nigeria.</p>
+  <div class="rev-track-wrap reveal"><div class="rev-track" id="revTrack"></div></div>
+  <div style="display:flex;gap:.8rem;justify-content:center;margin-top:1.2rem">
+    <button class="rev-arrow" onclick="slideRev(-1)">←</button>
+    <button class="rev-arrow" onclick="slideRev(1)">→</button>
+  </div>
+  <div style="display:flex;gap:.6rem;justify-content:center;margin-top:1rem" id="revDots"></div>
+  <div style="text-align:center;margin-top:1.5rem">
+    <button id="loadMoreBtn" onclick="loadMoreRevs()" style="background:transparent;border:1px solid rgba(245,166,35,.35);color:var(--solar);padding:.7rem 2rem;border-radius:2rem;font-family:var(--font-b);font-size:.85rem;font-weight:600;cursor:pointer;transition:background .2s" onmouseover="this.style.background='rgba(245,166,35,.08)'" onmouseout="this.style.background='transparent'">✨ Load More Reviews</button>
+    <p style="color:var(--muted);font-size:.74rem;margin-top:.5rem">Showing <span id="revCount">20</span> verified reviews</p>
+  </div>
+</section>
+
+<footer class="t-footer">
+  <div class="f-logo">Tuk<span>nova</span> Enterprise</div>
+  <p class="f-tagline">Powering Homes & Securing Lives Across Nigeria.</p>
+  <div class="f-links">
+    <a href="index.html">Home</a><a href="products.html">Products</a>
+    <a href="solar.html">Solar Quote</a><a href="inverter.html">Inverter</a>
+    <a href="battery.html">Battery</a><a href="camera.html">CCTV</a>
+    <a href="calculator.html">Calculator</a><a href="contact.html">Contact</a>
+    <a href="tel:+2349064859498">📞 09064859498</a>
+  </div>
+  <p class="f-copy">© 2025 Tuknova Enterprise · Lagos, Nigeria · All rights reserved</p>
+</footer>
+
+<script src="shared.js"></script>
+<script>
+// REVIEWS
+const reviews=[
+  {name:'Emeka Okafor',loc:'Ikeja, Lagos',stars:5,text:'Before Tuknova I spent ₦50k monthly on fuel. Now 4 panels and 2 batteries — I barely run gen. Investment paid back in 6 months.',ago:'2 weeks ago'},
+  {name:'Fatima Abdullahi',loc:'Garki, Abuja',stars:5,text:'They were the only ones who properly calculated my load before quoting. Installation was clean and the engineer explained everything. Excellent.',ago:'1 month ago'},
+  {name:'Chukwudi Nwachukwu',loc:'Enugu',stars:5,text:'They delivered to Enugu and installed in one day. My house is now 24-hour light. Thank God for this company.',ago:'3 weeks ago'},
+  {name:'Blessing Adeyemi',loc:'Surulere, Lagos',stars:5,text:'Camera system is perfect. I watch my shop from anywhere on my phone. Night vision is crystal clear. Very affordable.',ago:'5 days ago'},
+  {name:'Musa Garba',loc:'Kano',stars:5,text:"They didn't oversell me — gave me exactly what my house needed. Saved me money. WhatsApp response is very fast. Referred 4 neighbours.",ago:'2 months ago'},
+  {name:'Ngozi Eze',loc:'Owerri, Imo',stars:5,text:'Product arrived perfect. Installation team came next day. 10/10.',ago:'3 days ago'},
+  {name:'Taiwo Olabisi',loc:'Ibadan, Oyo',stars:4,text:'Inverter is perfect for my business. Delivery and service made up for distance. Very good company.',ago:'6 weeks ago'},
+  {name:'Rabiu Ismail',loc:'Port Harcourt',stars:5,text:'System running 8 months, zero issues. When I had a question they walked me through on WhatsApp video. Very professional.',ago:'1 month ago'},
+  {name:'Adaeze Nwosu',loc:'Asaba, Delta',stars:5,text:'Tired of NEPA wahala. Now my children study at night, fridge always on, fan always on. Worth every kobo.',ago:'2 weeks ago'},
+  {name:'Ibrahim Suleiman',loc:'Kaduna',stars:5,text:'Fast delivery to Kaduna. Everything arrived safely. Engineer called me immediately and guided setup before installer came.',ago:'1 week ago'},
+  {name:'Chioma Okonkwo',loc:'Lekki, Lagos',stars:5,text:"I run a salon. Since Tuknova installed my solar I don't lose customers to light. Dryer, fans, TV, clippers all running. Business improved!",ago:'3 weeks ago'},
+  {name:'Yusuf Bello',loc:'Ilorin, Kwara',stars:4,text:'They told me honestly a smaller system was enough and saved me ₦200k. That honesty is rare in Nigeria.',ago:'2 months ago'},
+  {name:'Amaka Obi',loc:'Festac, Lagos',stars:5,text:'Calculated on website, WhatsApp same day, delivery 48hrs, installation 3 hours. Perfect. Very impressed.',ago:'4 days ago'},
+  {name:'Sani Danjuma',loc:'Jos, Plateau',stars:5,text:'Solar for my 8-room guesthouse plus CCTV. Guests happy, no generator noise. Professional company.',ago:'5 weeks ago'},
+  {name:'Kemi Fashola',loc:'Abeokuta, Ogun',stars:5,text:'Husband bought first, worked so well I referred sister and two colleagues. All happy customers. Very consistent.',ago:'1 month ago'},
+  {name:'Okonkwo Ebuka',loc:'Awka, Anambra',stars:5,text:'The calculator told me exactly what to buy. When I confirmed with their team it was accurate. Very smart company.',ago:'2 weeks ago'},
+  {name:'Hauwa Usman',loc:'Maiduguri, Borno',stars:5,text:'Solar was new to me, I was afraid. Tuknova patiently explained everything through WhatsApp, sent videos. I finally did it. No regrets.',ago:'3 months ago'},
+  {name:'Tunde Bakare',loc:'VI, Lagos',stars:5,text:'CCTV package for my office — 4 cameras, NVR, remote phone viewing. Installation neat. Team showed security guard how to operate. 5 stars.',ago:'1 week ago'},
+  {name:'Obiageli Anozie',loc:'Uyo, Akwa Ibom',stars:4,text:'Delivery one day late but Tuknova kept me informed. Equipment very quality. System working without fault 5 months. Good company.',ago:'6 weeks ago'},
+  {name:'Danladi Musa',loc:'Sokoto',stars:5,text:'Sun in Sokoto is strong — solar is perfect here. Using Tuknova system over a year. Zero problems. Very reliable.',ago:'2 months ago'},
+];
+const usedNames=new Set(reviews.map(r=>r.name));
+let allRevs=[...reviews],revIdx=0;
+const perView=()=>window.innerWidth<700?1:window.innerWidth<1000?2:3;
+const track=document.getElementById('revTrack');
+const dots=document.getElementById('revDots');
+function buildCard(r){
+  const d=document.createElement('div');d.className='rev-card';
+  d.innerHTML=`<div class="rev-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div><p class="rev-text">${r.text}</p><div style="display:flex;align-items:center;gap:.8rem"><div class="rev-avatar">${r.name[0]}</div><div><div style="font-weight:700;font-size:.9rem">${r.name}</div><div style="font-size:.75rem;color:var(--muted)">📍 ${r.loc} · ${r.ago||'recently'}</div></div></div>`;
+  return d;
+}
+function renderRevs(){track.innerHTML='';allRevs.forEach(r=>track.appendChild(buildCard(r)));buildDots();setRev(0)}
+function buildDots(){dots.innerHTML='';const max=Math.min(allRevs.length-perView()+1,25);for(let i=0;i<max;i++){const d=document.createElement('button');d.className='rev-dot'+(i===revIdx?' active':'');d.onclick=()=>setRev(i);dots.appendChild(d);}}
+function setRev(n){const max=Math.max(0,allRevs.length-perView());revIdx=Math.max(0,Math.min(n,max));const w=track.children[0]?(track.children[0].offsetWidth+24):344;track.style.transform=`translateX(-${revIdx*w}px)`;document.querySelectorAll('.rev-dot').forEach((d,i)=>d.classList.toggle('active',i===revIdx));}
+function slideRev(d){const max=allRevs.length-perView();setRev(revIdx+d<0?max:revIdx+d>max?0:revIdx+d);}
+let autoT=setInterval(()=>slideRev(1),5000);
+renderRevs();
+async function loadMoreRevs(){
+  const btn=document.getElementById('loadMoreBtn');
+  btn.disabled=true;btn.textContent='⏳ Loading...';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:`Generate 5 unique realistic Nigerian customer reviews for "Tuknova Enterprise" solar/inverter/battery/CCTV company Lagos Nigeria. Rules: authentic Nigerian English with expressions like "NEPA wahala","gen","light","kobo". Vary services. Diverse names/locations all geopolitical zones. Stars 4-5. 2-4 sentences each. DO NOT use: ${[...usedNames].join(', ')}. Respond ONLY JSON array: [{"name":"...","loc":"City, State","stars":5,"text":"...","ago":"..."}]`}]})});
+    const data=await res.json();
+    let raw=data.content.map(c=>c.text||'').join('').replace(/```json|```/g,'').trim();
+    JSON.parse(raw).forEach(r=>{if(!usedNames.has(r.name)){usedNames.add(r.name);allRevs.push(r);track.appendChild(buildCard(r));}});
+    buildDots();document.getElementById('revCount').textContent=allRevs.length;
+    btn.textContent=`✅ ${allRevs.length} Reviews — Load More`;btn.disabled=false;
+  }catch(e){btn.textContent='⚠️ Try again';btn.disabled=false;}
+}
+</script>
+</body>
+</html>

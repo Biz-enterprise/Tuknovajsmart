@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Products — Tuknova Enterprise Nigeria</title>
+<meta name="description" content="Shop solar panels, inverters, batteries and CCTV cameras. Top brands, competitive prices, nationwide delivery in Nigeria."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="shared.css"/>
+<style>
+.page-hero{padding:130px 5% 60px;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(245,166,35,.1) 0%,transparent 70%);text-align:center}
+.hero-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em}
+.hero-sub{color:var(--muted);font-size:1rem;margin:1rem auto 2rem;max-width:500px}
+.filter-bar{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.filter-btn{background:var(--panel);border:1.5px solid var(--border);color:var(--muted);padding:.5rem 1.2rem;border-radius:2rem;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .25s}
+.filter-btn:hover{border-color:rgba(245,166,35,.4);color:var(--solar)}
+.filter-btn.active{background:rgba(245,166,35,.1);border-color:var(--solar);color:var(--solar)}
+main{max-width:1100px;margin:0 auto;padding:0 5% 6rem}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+.prod-card{background:var(--panel);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.prod-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.prod-img{height:170px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,var(--deep),rgba(245,166,35,.04));position:relative}
+.prod-badge{position:absolute;top:1rem;left:1rem;background:var(--solar);color:var(--void);font-size:.65rem;font-weight:800;padding:.25rem .6rem;border-radius:.8rem;letter-spacing:.06em}
+.prod-body{padding:1.4rem}
+.prod-cat{font-size:.68rem;color:var(--arc);font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem}
+.prod-name{font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.prod-desc{color:var(--muted);font-size:.82rem;line-height:1.55;margin-bottom:1rem}
+.prod-specs{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.spec-tag{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.15);color:var(--solar);font-size:.65rem;font-weight:600;padding:.2rem .5rem;border-radius:.5rem}
+.prod-cta{display:block;text-align:center;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);color:var(--green);padding:.65rem 1rem;border-radius:8px;font-size:.82rem;font-weight:700;text-decoration:none;cursor:pointer;transition:background .2s}
+.prod-cta:hover{background:rgba(37,211,102,.2)}
+.section-break{text-align:center;padding:2rem 0 1rem;font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--solar)}
+</style>
+</head>
+<body>
+<nav class="t-nav" id="navbar">
+  <a class="t-logo" href="index.html">Tuk<span>nova</span></a>
+  <ul class="t-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="solar.html">Solar</a></li>
+    <li><a href="inverter.html">Inverter</a></li>
+    <li><a href="battery.html">Battery</a></li>
+    <li><a href="camera.html">CCTV</a></li>
+    <li><a href="products.html" class="active">Products</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a class="t-cta" href="solar.html">Get Quote</a>
+  <button class="t-hamburger" onclick="openMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="t-mobile" id="tMobile">
+  <button class="t-close" onclick="closeMenu()">X</button>
+  <a href="index.html" onclick="closeMenu()">Home</a><a href="solar.html" onclick="closeMenu()">Solar</a>
+  <a href="inverter.html" onclick="closeMenu()">Inverter</a><a href="battery.html" onclick="closeMenu()">Battery</a>
+  <a href="camera.html" onclick="closeMenu()">CCTV</a><a href="products.html" onclick="closeMenu()">Products</a>
+  <a href="contact.html" onclick="closeMenu()">Contact</a>
+</div>
+
+<section class="page-hero">
+  <div class="eyebrow">Our Products</div>
+  <h1 class="hero-title">Top-Quality Equipment<br/><span style="color:var(--solar)">Ready in Stock</span></h1>
+  <p class="hero-sub">All products available for immediate sale and delivery across all 36 states of Nigeria. Tap any product to get a WhatsApp price quote.</p>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterProds('all',this)">All Products</button>
+    <button class="filter-btn" onclick="filterProds('solar',this)">Solar Panels</button>
+    <button class="filter-btn" onclick="filterProds('inverter',this)">Inverters</button>
+    <button class="filter-btn" onclick="filterProds('battery',this)">Batteries</button>
+    <button class="filter-btn" onclick="filterProds('camera',this)">CCTV Cameras</button>
+  </div>
+</section>
+<div class="ticker-wrap"><div class="ticker-inner"><span>Solar Panels</span><span>Hybrid Inverters</span><span>Lithium Batteries</span><span>HD Cameras</span><span>MPPT Controllers</span><span>AGM Batteries</span><span>Pure Sine Inverters</span><span>4K Cameras</span><span>Nationwide Delivery</span><span>Solar Panels</span><span>Hybrid Inverters</span><span>Lithium Batteries</span><span>HD Cameras</span><span>MPPT Controllers</span><span>AGM Batteries</span><span>Pure Sine Inverters</span><span>4K Cameras</span><span>Nationwide Delivery</span></div></div>
+<main>
+  <div class="prod-grid" id="prodGrid"></div>
+</main>
+<footer class="t-footer">
+  <div class="t-footer-logo">Tuk<span>nova</span> Enterprise</div>
+  <p class="t-footer-tagline">Powering Homes and Securing Lives Across Nigeria</p>
+  <div class="t-footer-links">
+    <a href="index.html">Home</a><a href="solar.html">Solar</a><a href="inverter.html">Inverter</a>
+    <a href="battery.html">Battery</a><a href="camera.html">CCTV</a><a href="products.html">Products</a><a href="contact.html">Contact</a>
+  </div>
+  <p class="t-footer-copy">2025 Tuknova Enterprise Lagos Nigeria</p>
+</footer>
+<script>
+const products = [
+  {cat:'solar',icon:'☀️',badge:'BEST SELLER',name:'400W Monocrystalline Solar Panel',desc:'High-efficiency mono panel ideal for homes. Excellent performance even in low light. 25-year power output warranty.',specs:['400W','Mono','25yr Warranty'],link:'solar.html'},
+  {cat:'solar',icon:'🌤️',badge:null,name:'200W Solar Panel',desc:'Perfect for smaller systems — workshops, boreholes, and low-power homes. Durable aluminium frame.',specs:['200W','Mono','Durable Frame'],link:'solar.html'},
+  {cat:'solar',icon:'☀️',badge:'POPULAR',name:'550W Bifacial Solar Panel',desc:'Captures light from both sides for up to 30% more energy. Premium choice for commercial and off-grid systems.',specs:['550W','Bifacial','Commercial Grade'],link:'solar.html'},
+  {cat:'solar',icon:'🌞',badge:null,name:'100W Flexible Solar Panel',desc:'Lightweight and bendable — perfect for RVs, boats, rooftops with curves. Portable and easy to mount.',specs:['100W','Flexible','Portable'],link:'solar.html'},
+  {cat:'inverter',icon:'🔌',badge:'BEST VALUE',name:'1KVA Pure Sine Inverter',desc:'Ideal for basic homes — fans, lights, TV, decoder, phone chargers. Clean pure sine output for all appliances.',specs:['1KVA','Pure Sine','12V'],link:'inverter.html'},
+  {cat:'inverter',icon:'⚡',badge:'POPULAR',name:'3KVA Hybrid Inverter',desc:'Built-in MPPT solar charger. Powers full home with fridge, AC and more. Compatible with AGM and Lithium.',specs:['3KVA','Hybrid','MPPT Built-in'],link:'inverter.html'},
+  {cat:'inverter',icon:'🔌',badge:null,name:'5KVA Hybrid Inverter',desc:'Large home and SME solution. Handles multiple ACs, washing machine, water pump and all heavy loads.',specs:['5KVA','Hybrid','48V'],link:'inverter.html'},
+  {cat:'inverter',icon:'⚡',badge:'COMMERCIAL',name:'10KVA Three-Phase Inverter',desc:'For offices, factories and commercial buildings with heavy three-phase loads. Industrial grade reliability.',specs:['10KVA','3-Phase','Commercial'],link:'inverter.html'},
+  {cat:'battery',icon:'🔋',badge:'POPULAR',name:'200Ah AGM Deep-Cycle Battery',desc:'Standard deep-cycle battery. Most affordable option for home solar systems. No maintenance required.',specs:['200Ah','AGM','12V','Maintenance-free'],link:'battery.html'},
+  {cat:'battery',icon:'⚡',badge:'PREMIUM',name:'100Ah Lithium LiFePO4 Battery',desc:'Premium lithium battery. 10+ year lifespan, lightweight, fast charging. Best long-term investment for solar.',specs:['100Ah','LiFePO4','10yr Life'],link:'battery.html'},
+  {cat:'battery',icon:'🔋',badge:null,name:'200Ah Gel Battery',desc:'Sealed gel technology. No acid spills, no maintenance. Performs well in high-temperature Nigerian climate.',specs:['200Ah','Gel','Sealed'],link:'battery.html'},
+  {cat:'battery',icon:'⚡',badge:'NEW',name:'200Ah Lithium LiFePO4 Battery',desc:'Heavy-duty lithium battery for large solar systems. Pairs perfectly with 48V hybrid inverters.',specs:['200Ah','LiFePO4','48V Compatible'],link:'battery.html'},
+  {cat:'camera',icon:'📷',badge:'BEST SELLER',name:'2MP HD CCTV Camera Kit (4-Channel)',desc:'4 outdoor cameras + DVR + cables. HD 1080p, night vision, remote viewing on phone. Easy to install.',specs:['4 Cameras','1080p','Night Vision','DVR Included'],link:'camera.html'},
+  {cat:'camera',icon:'📷',badge:'POPULAR',name:'4MP Full HD Camera Kit (8-Channel)',desc:'8 cameras, clearer detail, AI motion detection, remote alerts to phone. Perfect for shops and offices.',specs:['8 Cameras','4MP','AI Motion','Alerts'],link:'camera.html'},
+  {cat:'camera',icon:'🎥',badge:null,name:'4K PTZ Speed Dome Camera',desc:'360-degree pan, tilt and zoom. Crystal-clear 4K, AI object tracking, covers large compounds automatically.',specs:['4K 8MP','360° PTZ','AI Tracking'],link:'camera.html'},
+  {cat:'camera',icon:'📷',badge:'OFFICE PICK',name:'16-Channel NVR System',desc:'Full 16-camera IP system with NVR, 2TB storage, remote monitoring. For offices, factories and large sites.',specs:['16 Cameras','IP System','2TB Storage'],link:'camera.html'},
+];
+
+let currentFilter = 'all';
+function filterProds(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid();
+}
+function renderGrid() {
+  const grid = document.getElementById('prodGrid');
+  const filtered = currentFilter === 'all' ? products : products.filter(p => p.cat === currentFilter);
+  grid.innerHTML = filtered.map(p => {
+    const wa = "I am interested in the "+p.name+". Please send me the current price and availability. Thank you!";
+    return '<div class="prod-card reveal">' +
+      '<div class="prod-img">' + p.icon +
+      (p.badge ? '<span class="prod-badge">'+p.badge+'</span>' : '') + '</div>' +
+      '<div class="prod-body">' +
+      '<div class="prod-cat">' + p.cat.toUpperCase() + '</div>' +
+      '<div class="prod-name">' + p.name + '</div>' +
+      '<div class="prod-desc">' + p.desc + '</div>' +
+      '<div class="prod-specs">' + p.specs.map(s=>'<span class="spec-tag">'+s+'</span>').join('') + '</div>' +
+      '<a class="prod-cta" href="https://wa.me/2349064859498?text='+encodeURIComponent(wa)+'" target="_blank">💬 Get Price on WhatsApp</a>' +
+      '</div></div>';
+  }).join('');
+  document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+}
+renderGrid();
+// ═══════════════════════════════════════
+// TUKNOVA SHARED JS — included in all pages
+// ═══════════════════════════════════════
+
+// Nav mobile
+function openMenu() { document.getElementById('tMobile').classList.add('open'); }
+function closeMenu() { document.getElementById('tMobile').classList.remove('open'); }
+
+// Set active nav link
+(function(){
+  const page = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.t-links a').forEach(a => {
+    if(a.getAttribute('href') === page) a.classList.add('active');
+  });
+})();
+
+</script>
+<script src="shared.js"></script>
+</body>
+</html>
